@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2014 Magnus Woxblom
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <com.woxthebox.draglistview.sample.MySwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="102dp">
+
+            <!-- Need to wrap DragListView in another layout for
+            wrap_content to work for some reason -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_weight="8">
+
+                <com.woxthebox.draglistview.DragListView
+                    android:id="@+id/drag_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <com.woxthebox.draglistview.DragListView
+                    android:id="@+id/drag_list_view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </FrameLayout>
+        </com.woxthebox.draglistview.sample.MySwipeRefreshLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            android:orientation="vertical"
+            android:padding="6dp"
+            android:weightSum="5">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/button_forward"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/forward_background"
+                    android:drawableLeft="@drawable/forward_icon"
+                    android:drawablePadding="10dp"
+                    android:elevation="2dp"
+                    android:gravity="left|center_vertical"
+                    android:onClick="clickForward"
+                    android:text="@string/icon_forward"
+                    android:textColor="@color/btn_text_color" />
+
+                <Button
+                    android:id="@+id/button_backward"
+
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/backward_background"
+                    android:drawableLeft="@drawable/backward_icon"
+                    android:drawablePadding="10dp"
+                    android:elevation="2dp"
+
+                    android:gravity="left|center_vertical"
+                    android:onClick="clickBackward"
+                    android:text="@string/icon_backward"
+                    android:textColor="@color/btn_text_color" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/button_left"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/left_background"
+                    android:drawableLeft="@drawable/left_icon"
+                    android:drawablePadding="10dp"
+                    android:elevation="2dp"
+                    android:gravity="left|center_vertical"
+                    android:onClick="clickLeft"
+                    android:text="@string/icon_left"
+                    android:textColor="@color/btn_text_color" />
+
+                <Button
+                    android:id="@+id/button_right"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/right_background"
+                    android:drawableLeft="@drawable/right_icon"
+                    android:drawablePadding="10dp"
+                    android:elevation="2dp"
+                    android:gravity="left|center_vertical"
+                    android:onClick="clickRight"
+                    android:text="@string/icon_right"
+                    android:textColor="@color/btn_text_color" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/button_delay"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/delay_background"
+                    android:drawableLeft="@drawable/delay_icon"
+                    android:drawablePadding="10dp"
+                    android:elevation="2dp"
+                    android:gravity="left|center_vertical"
+                    android:onClick="clickDelay"
+                    android:text="@string/icon_delay"
+                    android:textColor="@color/btn_text_color" />
+
+                <Button
+                    android:id="@+id/button_gripper"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/gripper_background"
+                    android:drawableLeft="@drawable/gripper_icon"
+                    android:drawablePadding="10dp"
+                    android:elevation="2dp"
+                    android:gravity="left|center_vertical"
+                    android:onClick="clickGripper"
+                    android:text="@string/icon_gripper"
+                    android:textColor="@color/btn_text_color" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/button_sound"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/sound_background"
+                    android:drawableLeft="@drawable/sound_icon"
+                    android:drawablePadding="10dp"
+                    android:elevation="2dp"
+                    android:gravity="left|center_vertical"
+                    android:onClick="clickSound"
+                    android:text="@string/icon_sound"
+                    android:textColor="@color/btn_text_color" />
+
+                <Button
+                    android:id="@+id/button_display"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="74dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/display_background"
+                    android:drawableLeft="@drawable/display_icon"
+                    android:drawablePadding="10dp"
+                    android:elevation="2dp"
+                    android:gravity="left|center_vertical"
+                    android:onClick="clickDisplay"
+                    android:text="@string/icon_display"
+                    android:textColor="@color/btn_text_color" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/button_wallfol"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/wallfol_background"
+                    android:drawableLeft="@drawable/wallfol_icon"
+                    android:drawablePadding="10dp"
+                    android:elevation="2dp"
+                    android:gravity="left|center_vertical"
+                    android:onClick="clickWallfol"
+                    android:text="@string/icon_wallfol"
+                    android:textColor="@color/btn_text_color" />
+
+                <Button
+                    android:id="@+id/button_linefol"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/linefol_background"
+                    android:drawableLeft="@drawable/linefol_icon"
+                    android:drawablePadding="15dp"
+                    android:elevation="2dp"
+                    android:gravity="left|center_vertical"
+                    android:onClick="clickLinefol"
+                    android:text="@string/icon_linefol"
+                    android:textColor="@color/btn_text_color" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

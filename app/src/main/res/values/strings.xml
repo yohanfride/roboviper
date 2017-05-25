@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2014 Magnus Woxblom
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+
+    <string name="app_name">Re : RoboViper(beta)</string>
+    <string name="action_lists">Test lists</string>
+    <string name="action_board">Test board </string>
+    <string name="action_disable_drag">Disable drag</string>
+    <string name="action_enable_drag">Enable drag</string>
+    <string name="action_list">List (drag on touch image icon)</string>
+    <string name="action_grid_vertical">Grid vertical (drag on long press)</string>
+    <string name="action_grid_horizontal">Grid horizontal (drag on long press)</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_paired_devices">PerangkatTerpasang</string>
+    <string name="title_other_devices">Perangkat Lain Yang Tersedia </string>
+    <string name="button_scan">Mencari Perangkat</string>
+    <string name="select_device">Pilih Perangkat</string>
+    <string name="none_found">Tidak Ditemukan Perangkat Tersedia</string>
+    <string name="scanning">Mencari Perangkat...</string>
+    <string name="none_paired">Tidak Ada Perangkat Terpasang</string>
+    <string name="title_connecting">  Menyambungkan...</string>
+    <string name="title_not_connected">  Tidak ada perangkat tersambung</string>
+    <string name="bt_not_enabled">Bluetooth tidak aktif</string>
+    <string name="title_connected">  Tersambung ke : </string>
+
+    <string name="icon_left">  Left </string>
+    <string name="icon_right">  Right </string>
+    <string name="icon_forward">  Forward </string>
+    <string name="icon_backward">  Backward </string>
+    <string name="icon_delay">  Delay </string>
+    <string name="icon_gripper">  Gripper </string>
+    <string name="icon_sound">  Sound </string>
+    <string name="icon_display">  Display </string>
+    <string name="icon_wallfol">  Wall Follower </string>
+    <string name="icon_linefol">  Line Follower </string>
+
+
+
+    <string name="instructions">Add an image. Then press on image to drag it. Drop it on the grid.</string>
+    <string name="hello">Add an image. Then drag it onto the grid.</string>
+    <integer name="num_images">9</integer>
+    <integer name="num_columns">3</integer>
+</resources>
