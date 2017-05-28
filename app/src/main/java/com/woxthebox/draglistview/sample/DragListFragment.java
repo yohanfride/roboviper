@@ -48,8 +48,8 @@ public class DragListFragment extends Fragment {
     private DragListView mDragListView;
     private ListSwipeHelper mSwipeHelper;
     private MySwipeRefreshLayout mRefreshLayout;
-    private int lastId=0;
-    private String FileName = "Roboviper Canvas";
+    public static int lastId=0;
+    public static String FileName = "Roboviper Canvas";
 
     public static DragListFragment newInstance() {
         return new DragListFragment();
@@ -72,7 +72,6 @@ public class DragListFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 mRefreshLayout.setEnabled(false);
-                Toast.makeText(mDragListView.getContext(), "position: " + position, Toast.LENGTH_SHORT).show();
                 Var.indexModule = position;
                 Intent intent = new Intent(getActivity(), PopUp.class);
                 startActivity(intent);
@@ -229,9 +228,15 @@ public class DragListFragment extends Fragment {
             setupGridHorizontalRecyclerView();
         } else {
             mDragListView.getAdapter().addItem(++lastId, new Pair<>((long) lastId, text));
-            //Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
         }
         Var.activeBlocks.add(new Modules(idMod));
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(FileName+" ("+(lastId+1)+"/64)");
+        Var.DragItem = mDragListView;
+        Var.LastID = lastId;
+    }
+
+    public void onResume(){
+        super.onResume();
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(FileName+" ("+(lastId+1)+"/64)");
     }
 }

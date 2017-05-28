@@ -9,6 +9,7 @@ import android.view.Display;
 import java.util.ArrayList;
 
 //import interfaces.Image;
+import com.woxthebox.draglistview.DragListView;
 import com.woxthebox.draglistview.sample.Modules;
 
 public class Var {
@@ -108,6 +109,8 @@ public class Var {
     public static StringBuffer output_string;
     public static BluetoothAdapter bluetooth_adapter = null;
     public static ServiceBluetooth service_data_io = null;
+    public static DragListView DragItem;
+	public static int LastID;
 
 	public static void order(int fromPosition, int toPosition){
 		ArrayList<Modules> newactiveBlocks= new ArrayList<Modules>();
@@ -127,6 +130,16 @@ public class Var {
 					newactiveBlocks.add(activeBlocks.get(fromPosition));
 				}
 			}
+		}
+		activeBlocks = newactiveBlocks;
+	}
+
+	public static void removeBlock(int fromPosition){
+		ArrayList<Modules> newactiveBlocks= new ArrayList<Modules>();
+		for(int i=0; i<activeBlocks.size(); i++){
+			if (fromPosition == i)
+				continue;
+			newactiveBlocks.add(activeBlocks.get(i));
 		}
 		activeBlocks = newactiveBlocks;
 	}
