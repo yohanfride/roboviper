@@ -94,7 +94,7 @@ public class Modules {
 			tipeData = fwd2;
 		}
 		if(idModules==Var.REVERSE_ID){
-			tipeData = reverse1;
+			tipeData = reverse2;
 		}
 		if(idModules==Var.TLEFT_ID){
 			tipeData = tleft2;
