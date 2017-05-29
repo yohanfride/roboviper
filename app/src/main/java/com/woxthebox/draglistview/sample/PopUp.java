@@ -52,6 +52,16 @@ public class PopUp extends Activity{
             turnLeft();
         } else if(TipeNow == Var.TRIGHT_ID){
             turnRight();
+        } else if(TipeNow == Var.DELAY_ID){
+            delay();
+        }else if(TipeNow == Var.GRIPPER_ID){
+            gripper();
+        }else if(TipeNow == Var.LCD_ID){
+            display();
+        }else if(TipeNow == Var.WFOLLOWER_ID){
+            wallFol();
+        }else if(TipeNow == Var.LFOLLOWER_ID){
+            lineFol();
         }
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -488,5 +498,524 @@ public class PopUp extends Activity{
         spinner.setSelection(a);
     }
 
+    private void delay(){
+        setContentView(R.layout.drag_pop_up_delay);
+        text1 = (TextView) findViewById(R.id.textViewAtas);
+        text2 = (TextView) findViewById(R.id.textViewBawah);
+        TextView blocks_text = (TextView) findViewById(R.id.Blocks);
+        blocks_text.setText("Block number: "+(Var.indexModule+1));
+        ImageButton btnDelete = (ImageButton) findViewById(R.id.deleteButton);
+        //Spinner
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder adb=new AlertDialog.Builder(PopUp.this);
+                adb.setTitle("Delete?");
+                adb.setMessage("Are you sure you want to delete?");
+                adb.setNegativeButton("Cancel", null);
+                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Var.DragItem.getAdapter().removeItem(Var.indexModule);
+                        DragListFragment.lastId--;
+                        Var.removeBlock(Var.indexModule);
+                        finish();
+                    }});
+                adb.show();
+
+            }
+
+        });
+        //End Spinner
+        EditText value1 = (EditText) findViewById(R.id.Value1);
+        value1.setText(BlockNow.dvalue);
+        value1.addTextChangedListener(new  TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                BlockNow.dvalue = s.toString();
+            }
+        });
+        //End Edit
+    }
+
+    private void gripper(){
+        setContentView(R.layout.drag_pop_up_gripper);
+        TextView blocks_text = (TextView) findViewById(R.id.Blocks);
+        blocks_text.setText("Block number: "+(Var.indexModule+1));
+        ImageButton btnDelete = (ImageButton) findViewById(R.id.deleteButton);
+        //Spinner
+        addItemsOnSpinner_gripper();
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder adb=new AlertDialog.Builder(PopUp.this);
+                adb.setTitle("Delete?");
+                adb.setMessage("Are you sure you want to delete?");
+                adb.setNegativeButton("Cancel", null);
+                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Var.DragItem.getAdapter().removeItem(Var.indexModule);
+                        DragListFragment.lastId--;
+                        Var.removeBlock(Var.indexModule);
+                        finish();
+                    }});
+                adb.show();
+
+            }
+
+        });
+        //End Spinner
+    }
+
+    public void addItemsOnSpinner_gripper() {
+
+        spinner = (Spinner) findViewById(R.id.change_mode);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                if(pos == 0){
+                    BlockNow.tipeData = BlockNow.gripper1;
+                }else {
+                    BlockNow.tipeData = BlockNow.gripper2;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        List<String> list = new ArrayList<String>();
+        list.add("Take object");
+        list.add("Put object");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                R.layout.spinner_item, list);
+        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+
+        int a;
+        if(BlockNow.tipeData == BlockNow.gripper1) a = 0;
+        else a = 1;
+        spinner.setSelection(a);
+    }
+
+    private void sound(){
+        setContentView(R.layout.drag_pop_up_right);
+        text1 = (TextView) findViewById(R.id.textViewAtas);
+        text2 = (TextView) findViewById(R.id.textViewBawah);
+        TextView blocks_text = (TextView) findViewById(R.id.Blocks);
+        blocks_text.setText("Block number: "+(Var.indexModule+1));
+        ImageButton btnDelete = (ImageButton) findViewById(R.id.deleteButton);
+        //Spinner
+        addItemsOnSpinner_sound();
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder adb=new AlertDialog.Builder(PopUp.this);
+                adb.setTitle("Delete?");
+                adb.setMessage("Are you sure you want to delete?");
+                adb.setNegativeButton("Cancel", null);
+                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Var.DragItem.getAdapter().removeItem(Var.indexModule);
+                        DragListFragment.lastId--;
+                        Var.removeBlock(Var.indexModule);
+                        finish();
+                    }});
+                adb.show();
+
+            }
+
+        });
+        //End Spinner
+        EditText value1 = (EditText) findViewById(R.id.Value1);
+        value1.setText(BlockNow.astaOn);
+        value1.addTextChangedListener(new  TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                BlockNow.astaOn = s.toString();
+            }
+        });
+        //End Edit
+    }
+
+    public void addItemsOnSpinner_sound() {
+
+        spinner = (Spinner) findViewById(R.id.change_mode);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                if(pos == 0){
+                    BlockNow.tipeData = BlockNow.sMonostable;
+                }else if(pos == 1){
+                    BlockNow.tipeData = BlockNow.sAstable;
+                }else {
+                    BlockNow.tipeData = BlockNow.sMario;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        List<String> list = new ArrayList<String>();
+        list.add("Mode 1");
+        list.add("Mode 2");
+        list.add("Super Mario");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                R.layout.spinner_item, list);
+        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+
+        int a;
+        if(BlockNow.tipeData == BlockNow.sMonostable) a = 0;
+        if(BlockNow.tipeData == BlockNow.sAstable) a = 1;
+        else a = 2;
+        spinner.setSelection(a);
+    }
+
+    private void display(){
+        setContentView(R.layout.drag_pop_up_display);
+        TextView blocks_text = (TextView) findViewById(R.id.Blocks);
+        blocks_text.setText("Block number: "+(Var.indexModule+1));
+        ImageButton btnDelete = (ImageButton) findViewById(R.id.deleteButton);
+        //Spinner
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder adb=new AlertDialog.Builder(PopUp.this);
+                adb.setTitle("Delete?");
+                adb.setMessage("Are you sure you want to delete?");
+                adb.setNegativeButton("Cancel", null);
+                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Var.DragItem.getAdapter().removeItem(Var.indexModule);
+                        DragListFragment.lastId--;
+                        Var.removeBlock(Var.indexModule);
+                        finish();
+                    }});
+                adb.show();
+
+            }
+
+        });
+        //End Spinner
+        EditText value1 = (EditText) findViewById(R.id.Value1);
+        value1.setText(BlockNow.lcdChar);
+        value1.addTextChangedListener(new  TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                BlockNow.lcdChar = s.toString();
+            }
+        });
+        //End Edit
+    }
+
+    private void wallFol(){
+        setContentView(R.layout.drag_pop_up_wallfol);
+        text1 = (TextView) findViewById(R.id.textViewAtas2);
+        text2 = (TextView) findViewById(R.id.textViewBawah2);
+        TextView blocks_text = (TextView) findViewById(R.id.Blocks);
+        blocks_text.setText("Block number: "+(Var.indexModule+1));
+        ImageButton btnDelete = (ImageButton) findViewById(R.id.deleteButton);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder adb=new AlertDialog.Builder(PopUp.this);
+                adb.setTitle("Delete?");
+                adb.setMessage("Are you sure you want to delete?");
+                adb.setNegativeButton("Cancel", null);
+                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Var.DragItem.getAdapter().removeItem(Var.indexModule);
+                        DragListFragment.lastId--;
+                        Var.removeBlock(Var.indexModule);
+                        finish();
+                    }});
+                adb.show();
+
+            }
+
+        });
+        //Spinner
+        addItemsOnSpinner_wallfol();
+        addItemsOnSpinner_wallfol2();
+        //End Spinner
+        EditText value1 = (EditText) findViewById(R.id.Value1);
+        value1.setText(BlockNow.wrange);
+        value1.addTextChangedListener(new  TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                BlockNow.wrange = s.toString();
+            }
+        });
+        //End Edit
+        EditText value2 = (EditText) findViewById(R.id.Value2);
+        value2.setText(BlockNow.wfvalue);
+        value2.addTextChangedListener(new  TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                BlockNow.wfvalue = s.toString();
+            }
+        });
+        //End Edit
+
+        SeekBar velocity = (SeekBar) findViewById(R.id.VeloseekBar);
+        velocity.setProgress(new Integer(BlockNow.wfspeed));
+        velocity.refreshDrawableState();
+        velocity.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener()
+                {
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        String test = seekBar.getProgress()+"";
+                        BlockNow.wfspeed = test;
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {}
+
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress,
+                                                  boolean fromUser){
+                    }
+
+                }
+        );
+        //End SeekBar
+    }
+
+    public void addItemsOnSpinner_wallfol() {
+
+        spinner = (Spinner) findViewById(R.id.sensor);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                if(pos == 0){
+                    BlockNow.tipeData = BlockNow.wfollower1;
+                }else {
+                    BlockNow.tipeData = BlockNow.wfollower2;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        List<String> list = new ArrayList<String>();
+        list.add("Right Sensor");
+        list.add("Left Sensor");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                R.layout.spinner_item, list);
+        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+
+        int a;
+        if(BlockNow.tipeData == BlockNow.wfollower1) a = 0;
+        else a = 1;
+        spinner.setSelection(a);
+    }
+
+    public void addItemsOnSpinner_wallfol2() {
+
+        spinner = (Spinner) findViewById(R.id.parameter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                if(pos == 0){
+                    text1.setText("sec");
+                    text2.setText("(0-100)");
+                    BlockNow.tipeData = BlockNow.wfwaktu;
+                }else {
+                    text1.setText("line");
+                    text2.setText("(0-50)");
+                    BlockNow.tipeData = BlockNow.wfgaris;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        List<String> list = new ArrayList<String>();
+        list.add("Duration");
+        list.add("Line");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                R.layout.spinner_item, list);
+        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+
+        int a;
+        if(BlockNow.wfpar2 == BlockNow.wfwaktu) a = 0;
+        else a = 1;
+        spinner.setSelection(a);
+    }
+
+    private void lineFol(){
+        setContentView(R.layout.drag_pop_up_linefol);
+        TextView blocks_text = (TextView) findViewById(R.id.Blocks);
+        blocks_text.setText("Block number: "+(Var.indexModule+1));
+        ImageButton btnDelete = (ImageButton) findViewById(R.id.deleteButton);
+        //Spinner
+        addItemsOnSpinner_linefol();
+        addItemsOnSpinner_linefol2();
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder adb=new AlertDialog.Builder(PopUp.this);
+                adb.setTitle("Delete?");
+                adb.setMessage("Are you sure you want to delete?");
+                adb.setNegativeButton("Cancel", null);
+                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Var.DragItem.getAdapter().removeItem(Var.indexModule);
+                        DragListFragment.lastId--;
+                        Var.removeBlock(Var.indexModule);
+                        finish();
+                    }});
+                adb.show();
+
+            }
+
+        });
+        //End Spinner
+        SeekBar velocity = (SeekBar) findViewById(R.id.VeloseekBar);
+        velocity.setProgress(new Integer(BlockNow.trspeed));
+        velocity.refreshDrawableState();
+        velocity.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener()
+                {
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        String test = seekBar.getProgress()+"";
+                        BlockNow.trspeed = test;
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {}
+
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress,
+                                                  boolean fromUser){
+                    }
+
+                }
+        );
+        //End SeekBar
+    }
+
+    public void addItemsOnSpinner_linefol() {
+
+        spinner = (Spinner) findViewById(R.id.change_mode);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                if(pos == 0){
+                    BlockNow.tipeData = BlockNow.lfollower1;
+                }if(pos == 1){
+                    BlockNow.tipeData = BlockNow.lfollower2;
+                }else {
+                    BlockNow.tipeData = BlockNow.lfollower3;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        List<String> list = new ArrayList<String>();
+        list.add("Intersection");
+        list.add("Right-junction");
+        list.add("Left-junction");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                R.layout.spinner_item, list);
+        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+
+        int a;
+        if(BlockNow.tipeData == BlockNow.lfollower1) a = 0;
+        else if(BlockNow.tipeData == BlockNow.lfollower2) a = 1;
+        else a = 2;
+        spinner.setSelection(a);
+    }
+
+    public void addItemsOnSpinner_linefol2() {
+
+        spinner = (Spinner) findViewById(R.id.change_mode2);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                if(pos == 0){
+                    BlockNow.lfvalue = "02";
+                }else if(pos == 1){
+                    BlockNow.lfvalue = "00";
+                }else {
+                    BlockNow.lfvalue = "01";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        List<String> list = new ArrayList<String>();
+        list.add("Stop");
+        list.add("Right");
+        list.add("Left");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                R.layout.spinner_item2, list);
+        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+
+        int a;
+        if(BlockNow.lfvalue == "02") a = 0;
+        else if(BlockNow.lfvalue == "00") a = 1;
+        else a = 2;
+        spinner.setSelection(a);
+    }
 }
 

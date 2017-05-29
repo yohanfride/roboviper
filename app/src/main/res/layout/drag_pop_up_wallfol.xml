@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:orientation="horizontal"
-        android:background="@color/icon_backward">
+        android:background="@color/icon_wallfol">
 
         <LinearLayout
             android:layout_width="121dp"
@@ -27,7 +27,7 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_margin="20dp"
-                android:src="@drawable/xbackward"
+                android:src="@drawable/xwallfoll"
                 android:tint="#ffffff" />
 
         </LinearLayout>
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="@string/icon_backward"
+                android:text="@string/icon_wallfol"
                 android:textColor="@android:color/background_light"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -72,9 +72,25 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewtitlee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="58dp"
+                android:text="Pick sensor and distance"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            android:layout_alignBottom="@+id/linearLayout">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -86,13 +102,12 @@
                 android:weightSum="1">
 
                 <Spinner
-                    android:id="@+id/change_mode"
+                    android:id="@+id/sensor"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_weight="1"
                     android:background="@drawable/spinner_background"
-                    android:textColor="#3CA7F0"
-                    />
+                    android:textColor="#3CA7F0" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -101,8 +116,7 @@
                     android:layout_marginRight="5dp"
                     android:background="@drawable/edittext_popup"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/Value1"
@@ -110,13 +124,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:backgroundTint="@android:color/background_light"
+                        android:digits="0123456789."
                         android:ems="10"
                         android:gravity="center"
+                        android:inputType="numberDecimal"
                         android:text="10"
                         android:textColor="@android:color/background_light"
-                        android:textStyle="bold"
-                        android:digits="0123456789."
-                        android:inputType="numberDecimal"/>
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="35dp"
@@ -146,6 +160,137 @@
                 </LinearLayout>
 
 
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="96dp"
+            android:orientation="vertical"
+            android:id="@+id/linearLayout">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="58dp"
+                android:text="Parameter"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="118dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#80D7D7D7"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <Spinner
+                    android:id="@+id/parameter"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/spinner_background"
+                    android:textColor="#3CA7F0" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/edittext_popup"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/Value2"
+                        android:layout_width="56dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@android:color/background_light"
+                        android:digits="0123456789."
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:text="10"
+                        android:textColor="@android:color/background_light"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="35dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewAtas2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="cm"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/textViewBawah2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="(5-100)"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="8sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="184dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="58dp"
+                    android:text="Velocity"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <SeekBar
+                    android:id="@+id/VeloseekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:max="20"/>
 
             </LinearLayout>
 
@@ -156,71 +301,6 @@
             android:layout_height="match_parent"
             android:layout_marginTop="120dp"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="15dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="58dp"
-                    android:text="Velocity"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <SeekBar
-                    android:id="@+id/VeloseekBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:max="20"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Slow" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:gravity="right"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="Fast" />
-
-                </LinearLayout>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

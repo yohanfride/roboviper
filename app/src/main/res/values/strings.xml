@@ -39,6 +39,8 @@
 
     <string name="icon_left">  Left </string>
     <string name="icon_right">  Right </string>
+    <string name="icon_left2">  Turn Left </string>
+    <string name="icon_right2">  Turn Right </string>
     <string name="icon_forward">  Forward </string>
     <string name="icon_backward">  Backward </string>
     <string name="icon_delay">  Delay </string>
