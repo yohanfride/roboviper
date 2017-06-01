@@ -101,7 +101,7 @@ public class DragListFragment extends Fragment {
         Button but1=(Button) view.findViewById(R.id.button_forward);
         but1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                addList("@drawable/forwardbox96px",Var.FORWARD_ID);
+                addList("@drawable/xforwardbox",Var.FORWARD_ID);
             }
         });
 
@@ -109,7 +109,7 @@ public class DragListFragment extends Fragment {
         but2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addList("@drawable/backwardbox96px",Var.REVERSE_ID);
+                addList("@drawable/xbackwardbox",Var.REVERSE_ID);
             }
         });
 
@@ -117,7 +117,7 @@ public class DragListFragment extends Fragment {
         but3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addList("@drawable/turnleftbox96px",Var.TLEFT_ID);
+                addList("@drawable/xturnleftbox",Var.TLEFT_ID);
             }
         });
 
@@ -125,7 +125,7 @@ public class DragListFragment extends Fragment {
         but4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addList("@drawable/turnrightbox96px",Var.TRIGHT_ID);
+                addList("@drawable/xturnrightbox",Var.TRIGHT_ID);
             }
         });
 
@@ -133,7 +133,7 @@ public class DragListFragment extends Fragment {
         but5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addList("@drawable/delaybox96px",Var.DELAY_ID);
+                addList("@drawable/xdelaybox",Var.DELAY_ID);
             }
         });
 
@@ -141,7 +141,7 @@ public class DragListFragment extends Fragment {
         but6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addList("@drawable/gripperbox96px",Var.GRIPPER_ID);
+                addList("@drawable/xgripperbox",Var.GRIPPER_ID);
             }
         });
 
@@ -149,7 +149,7 @@ public class DragListFragment extends Fragment {
         but7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addList("@drawable/soundbox96px",Var.SOUND_ID);
+                addList("@drawable/xsoundbox",Var.SOUND_ID);
             }
         });
 
@@ -157,15 +157,7 @@ public class DragListFragment extends Fragment {
         but8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addList("@drawable/displaybox96px",Var.LCD_ID);
-            }
-        });
-
-        Button but9=(Button) view.findViewById(R.id.button_wallfol);
-        but9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addList("@drawable/wallfollbox96px",Var.WFOLLOWER_ID);
+                addList("@drawable/xdisplaybox",Var.LCD_ID);
             }
         });
 
@@ -173,7 +165,7 @@ public class DragListFragment extends Fragment {
         but10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addList("@drawable/linefollbox96px",Var.LFOLLOWER_ID);
+                addList("@drawable/xlinefollbox",Var.LFOLLOWER_ID);
             }
         });
 
