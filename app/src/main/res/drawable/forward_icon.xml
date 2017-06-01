@@ -2,9 +2,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:drawable="@drawable/forward"
         android:width="@dimen/icon_width"
-        android:height="@dimen/icon_width"
+        android:height="@dimen/icon_height"
+        android:drawable="@drawable/xfoward"
         android:left="@dimen/icon_left"
         />
 

@@ -73,7 +73,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -91,8 +94,7 @@
                     android:layout_height="56dp"
                     android:layout_weight="1"
                     android:background="@drawable/spinner_background"
-                    android:textColor="#3CA7F0"
-                    />
+                    android:textColor="#3CA7F0" />
 
 
             </LinearLayout>
@@ -100,41 +102,62 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/NonMarioLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="58dp"
-                android:text="Buzz active during"
-                android:textStyle="bold" />
+            android:layout_marginTop="80dp"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:gravity="center"
+            android:weightSum="2">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:layout_weight="2"
                 android:orientation="horizontal">
 
-                <FrameLayout
+                <TextView
+                    android:id="@+id/textDuration"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Duration"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textDelay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Delay"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
                     android:layout_weight="1">
 
                     <EditText
                         android:id="@+id/Value1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
-                        android:layout_marginRight="100dp"
                         android:layout_weight="1"
                         android:backgroundTint="#3CA7F0"
                         android:ems="10"
                         android:gravity="center"
-                        android:inputType="textPersonName"
+                        android:inputType="numberDecimal"
                         android:text="3"
                         android:textColor="#3CA7F0"
                         android:textSize="30sp"
@@ -143,26 +166,23 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <Space
-                            android:layout_width="match_parent"
-                            android:layout_height="56dp"
-                            android:layout_weight="1" />
+                        android:orientation="horizontal"
+                        android:weightSum="5">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="36dp"
                             android:layout_marginTop="10dp"
-                            android:layout_weight="1"
+                            android:layout_weight="3"
                             android:orientation="vertical">
 
                             <TextView
                                 android:id="@+id/textViewAtas"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
                                 android:layout_weight="1"
+                                android:gravity="right"
                                 android:text="sec"
                                 android:textColor="#3CA7F0"
                                 android:textSize="18sp"
@@ -170,15 +190,121 @@
 
                             <TextView
                                 android:id="@+id/textViewBawah"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
                                 android:layout_weight="1"
+                                android:gravity="right"
                                 android:text="(1-100)"
                                 android:textColor="#3CA7F0"
                                 android:textSize="8sp" />
                         </LinearLayout>
 
                     </LinearLayout>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/DelayLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/Value2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="#3CA7F0"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:text="3"
+                        android:textColor="#3CA7F0"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="3"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textViewAtas2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="sec"
+                                android:textColor="#3CA7F0"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/textViewBawah2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="(1-100)"
+                                android:textColor="#3CA7F0"
+                                android:textSize="8sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/RepeatLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Repeat"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/Value3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#3CA7F0"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:text="3"
+                        android:textColor="#3CA7F0"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
 
                 </FrameLayout>
 
@@ -207,13 +333,13 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:adjustViewBounds="true"
                     android:background="@drawable/delete_background"
                     android:elevation="4dp"
                     android:padding="10dip"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/ic_delete_white_48dp"
-                    android:tint="@android:color/background_light"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"/>
+                    android:tint="@android:color/background_light" />
 
             </LinearLayout>
 

@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:drawable="@drawable/backward"
+        android:drawable="@drawable/xbackward"
         android:width="@dimen/icon_width"
         android:height="@dimen/icon_width"
         android:left="@dimen/icon_left"

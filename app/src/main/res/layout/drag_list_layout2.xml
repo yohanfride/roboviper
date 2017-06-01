@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2014 Magnus Woxblom
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <com.woxthebox.draglistview.sample.MySwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="102dp">
+
+            <!-- Need to wrap DragListView in another layout for
+            wrap_content to work for some reason -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_weight="8">
+
+                <com.woxthebox.draglistview.DragListView
+                    android:id="@+id/drag_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <com.woxthebox.draglistview.DragListView
+                    android:id="@+id/drag_list_view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </FrameLayout>
+        </com.woxthebox.draglistview.sample.MySwipeRefreshLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            android:orientation="vertical"
+            android:padding="6dp"
+            android:weightSum="5">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="3dp"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/forward_background"
+                        android:weightSum="2"
+                        android:elevation="14dp">
+
+                        <Button
+                            android:id="@+id/button_forward"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:background="@null"
+                            android:gravity="left|center_vertical"
+                            android:onClick="clickForward"
+                            android:paddingLeft="76dp"
+                            android:text="Forward"
+                            android:textColor="@color/btn_text_color" />
+
+                        <ImageView
+                            android:id="@+id/image_button_forward"
+                            android:layout_width="52dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="0.3"
+                            android:tint="@color/cardview_light_background"
+                            app:srcCompat="@drawable/xfoward" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="3dp"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/backward_background"
+                        android:weightSum="2">
+
+                        <Button
+                            android:id="@+id/button_backward"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:background="@null"
+                            android:gravity="left|center_vertical"
+                            android:onClick="clickBackward"
+                            android:paddingLeft="76dp"
+                            android:text="Backward"
+                            android:textColor="@color/btn_text_color" />
+
+                        <ImageView
+                            android:id="@+id/image_button_backward"
+                            android:layout_width="52dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="0.3"
+                            android:tint="@color/cardview_light_background"
+                            app:srcCompat="@drawable/xbackward" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="3dp"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/left_background"
+                        android:weightSum="2">
+
+                        <Button
+                            android:id="@+id/button_left"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:background="@null"
+                            android:gravity="left|center_vertical"
+                            android:onClick="clickLeft"
+                            android:paddingLeft="76dp"
+                            android:text="Turn Left"
+                            android:textColor="@color/btn_text_color" />
+
+                        <ImageView
+                            android:id="@+id/image_button_left"
+                            android:layout_width="52dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="0.3"
+                            android:tint="@color/cardview_light_background"
+                            app:srcCompat="@drawable/xturnleft" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="3dp"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/right_background"
+                        android:weightSum="2">
+
+                        <Button
+                            android:id="@+id/button_right"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:background="@null"
+                            android:gravity="left|center_vertical"
+                            android:onClick="clickRight"
+                            android:paddingLeft="76dp"
+                            android:text="Turn Right"
+                            android:textColor="@color/btn_text_color" />
+
+                        <ImageView
+                            android:id="@+id/image_button_right"
+                            android:layout_width="52dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="0.3"
+                            android:tint="@color/cardview_light_background"
+                            app:srcCompat="@drawable/xturnright" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="3dp"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/delay_background"
+                        android:weightSum="2">
+
+                        <Button
+                            android:id="@+id/button_delay"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:background="@null"
+                            android:gravity="left|center_vertical"
+                            android:onClick="clickDelay"
+                            android:paddingLeft="76dp"
+                            android:text="Delay"
+                            android:textColor="@color/btn_text_color" />
+
+                        <ImageView
+                            android:id="@+id/image_button_delay"
+                            android:layout_width="52dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="0.3"
+                            android:tint="@color/cardview_light_background"
+                            app:srcCompat="@drawable/xdelay" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="3dp"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/gripper_background"
+                        android:weightSum="2">
+
+                        <Button
+                            android:id="@+id/button_gripper"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:background="@null"
+                            android:gravity="left|center_vertical"
+                            android:onClick="clickGripper"
+                            android:paddingLeft="76dp"
+                            android:text="Gripper"
+                            android:textColor="@color/btn_text_color" />
+
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="52dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="0.3"
+                            android:tint="@color/cardview_light_background"
+                            app:srcCompat="@drawable/xgripper" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="3dp"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/sound_background"
+                        android:weightSum="2">
+
+                        <Button
+                            android:id="@+id/button_sound"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:background="@null"
+                            android:gravity="left|center_vertical"
+                            android:onClick="clickSound"
+                            android:paddingLeft="76dp"
+                            android:text="Sound"
+                            android:textColor="@color/btn_text_color" />
+
+                        <ImageView
+                            android:id="@+id/image_button_sound"
+                            android:layout_width="52dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="0.3"
+                            android:tint="@color/cardview_light_background"
+                            app:srcCompat="@drawable/xsound" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="3dp"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/display_background"
+                        android:weightSum="2">
+
+                        <Button
+                            android:id="@+id/button_display"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:background="@null"
+                            android:gravity="left|center_vertical"
+                            android:onClick="clickDisplay"
+                            android:paddingLeft="76dp"
+                            android:text="Display"
+                            android:textColor="@color/btn_text_color" />
+
+                        <ImageView
+                            android:id="@+id/image_button_display"
+                            android:layout_width="52dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="0.3"
+                            android:tint="@color/cardview_light_background"
+                            app:srcCompat="@drawable/xdisplay" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="3dp"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/linefol_background"
+                        android:weightSum="2">
+
+                        <Button
+                            android:id="@+id/button_linefol"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:background="@null"
+                            android:gravity="left|center_vertical"
+                            android:onClick="clickLinefol"
+                            android:paddingLeft="76dp"
+                            android:text="Line Follower"
+                            android:textColor="@color/btn_text_color" />
+
+                        <ImageView
+                            android:id="@+id/image_button_linefol"
+                            android:layout_width="52dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="0.3"
+                            android:tint="@color/cardview_light_background"
+                            app:srcCompat="@drawable/xlinefoll" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

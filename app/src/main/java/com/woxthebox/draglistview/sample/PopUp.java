@@ -16,7 +16,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -39,6 +41,7 @@ public class PopUp extends Activity{
     int TipeNow;
     TextView text1,text2;
     Modules BlockNow;
+    EditText value1,value2,value3;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +63,8 @@ public class PopUp extends Activity{
             display();
         }else if(TipeNow == Var.LFOLLOWER_ID){
             lineFol();
+        }else if(TipeNow == Var.SOUND_ID){
+            sound();
         }
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -605,9 +610,7 @@ public class PopUp extends Activity{
     }
 
     private void sound(){
-        setContentView(R.layout.drag_pop_up_right);
-        text1 = (TextView) findViewById(R.id.textViewAtas);
-        text2 = (TextView) findViewById(R.id.textViewBawah);
+        setContentView(R.layout.drag_pop_up_sound);
         TextView blocks_text = (TextView) findViewById(R.id.Blocks);
         blocks_text.setText("Block number: "+(Var.indexModule+1));
         ImageButton btnDelete = (ImageButton) findViewById(R.id.deleteButton);
@@ -632,9 +635,13 @@ public class PopUp extends Activity{
             }
 
         });
-        //End Spinner
-        EditText value1 = (EditText) findViewById(R.id.Value1);
-        value1.setText(BlockNow.astaOn);
+        value1 = (EditText) findViewById(R.id.Value1);
+        if(BlockNow.tipeData == BlockNow.sMonostable) {
+            value1.setText(BlockNow.monosOn);
+        } else if(BlockNow.tipeData == BlockNow.sAstable) {
+            value1.setText(BlockNow.astaOn);
+        }
+
         value1.addTextChangedListener(new  TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -646,13 +653,55 @@ public class PopUp extends Activity{
 
             @Override
             public void afterTextChanged(Editable s) {
-                BlockNow.astaOn = s.toString();
+                if(BlockNow.tipeData == BlockNow.sMonostable)
+                    BlockNow.monosOn = s.toString();
+                else
+                    BlockNow.astaOn = s.toString();
+            }
+        });
+
+        value2 = (EditText) findViewById(R.id.Value2);
+        value3 = (EditText) findViewById(R.id.Value3);
+
+        value2.setText(BlockNow.astaOff);
+        value2.addTextChangedListener(new  TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                BlockNow.astaOff = s.toString();
+            }
+        });
+        value3.setText(BlockNow.astaLoop);
+        value3.addTextChangedListener(new  TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                BlockNow.astaLoop = s.toString();
             }
         });
         //End Edit
+
     }
 
     public void addItemsOnSpinner_sound() {
+        final LinearLayout NonMarioLayout = (LinearLayout) findViewById(R.id.NonMarioLayout);
+        final TextView textDelay = (TextView) findViewById(R.id.textDelay);
+        final FrameLayout DelayLayout = (FrameLayout) findViewById(R.id.DelayLayout);
+        final LinearLayout RepeatLayout = (LinearLayout) findViewById(R.id.RepeatLayout);
 
         spinner = (Spinner) findViewById(R.id.change_mode);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -660,10 +709,30 @@ public class PopUp extends Activity{
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
                 if(pos == 0){
                     BlockNow.tipeData = BlockNow.sMonostable;
+                    //Show Layout
+                    NonMarioLayout.setVisibility(LinearLayout.VISIBLE);
+                    //Hide Layout
+                    DelayLayout.setVisibility(FrameLayout.INVISIBLE);
+                    RepeatLayout.setVisibility(LinearLayout.INVISIBLE);
+                    textDelay.setVisibility(TextView.INVISIBLE);
+                    value1.setText(BlockNow.monosOn);
                 }else if(pos == 1){
                     BlockNow.tipeData = BlockNow.sAstable;
+                    //Show Layout
+                    NonMarioLayout.setVisibility(LinearLayout.VISIBLE);
+                    DelayLayout.setVisibility(FrameLayout.VISIBLE);
+                    RepeatLayout.setVisibility(LinearLayout.VISIBLE);
+                    textDelay.setVisibility(TextView.VISIBLE);
+                    //Hide Layout
+                    value1.setText(BlockNow.astaOn);
                 }else {
                     BlockNow.tipeData = BlockNow.sMario;
+                    //Show Layout
+                    //Hide Layout
+                    NonMarioLayout.setVisibility(LinearLayout.INVISIBLE);
+                    DelayLayout.setVisibility(FrameLayout.INVISIBLE);
+                    RepeatLayout.setVisibility(LinearLayout.INVISIBLE);
+                    textDelay.setVisibility(TextView.INVISIBLE);
                 }
             }
 
@@ -683,7 +752,7 @@ public class PopUp extends Activity{
 
         int a;
         if(BlockNow.tipeData == BlockNow.sMonostable) a = 0;
-        if(BlockNow.tipeData == BlockNow.sAstable) a = 1;
+        else if(BlockNow.tipeData == BlockNow.sAstable) a = 1;
         else a = 2;
         spinner.setSelection(a);
     }
