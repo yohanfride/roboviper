@@ -24,7 +24,8 @@ import visualprogammer.Var;
 public class Modules {
 	public boolean mEmpty = true;
     public int order;
-    
+    public String iconDrag;
+
 	public EditText values;
 
 	public int idModules;
@@ -88,8 +89,9 @@ public class Modules {
     public String wfwaktu="waktu",wfgaris="garis";
     public static String tempwfspeed="",tempwrange="",tempwfpar="",tempwfvalue="";
 
-	public Modules(int id){
+	public Modules(int id, String icon){
 		this.idModules = id;
+		this.iconDrag = icon;
 		if(idModules ==Var.FORWARD_ID){
 			tipeData = fwd2;
 		}

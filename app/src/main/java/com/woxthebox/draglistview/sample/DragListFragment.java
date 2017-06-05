@@ -49,7 +49,7 @@ public class DragListFragment extends Fragment {
     private ListSwipeHelper mSwipeHelper;
     private MySwipeRefreshLayout mRefreshLayout;
     public static int lastId=0;
-    public static String FileName = "Roboviper Canvas";
+    public static String FileName = "";
 
     public static DragListFragment newInstance() {
         return new DragListFragment();
@@ -64,7 +64,9 @@ public class DragListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.drag_list_layout2, container, false);
+        FileName = "Roboviper Canvas";
         mRefreshLayout = (MySwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        mRefreshLayout.setEnabled(false);
         mDragListView = (DragListView) view.findViewById(R.id.drag_list_view);
         mDragListView.getRecyclerView().setVerticalScrollBarEnabled(true);
         mDragListView.setDragListListener(new DragListView.DragListListenerAdapter() {
@@ -85,7 +87,7 @@ public class DragListFragment extends Fragment {
 
             @Override
             public void onItemDragEnded(int fromPosition, int toPosition) {
-                mRefreshLayout.setEnabled(true);
+                mRefreshLayout.setEnabled(false);
                 if (fromPosition != toPosition) {
                     Var.order(fromPosition,toPosition);
                     //Toast.makeText(mDragListView.getContext(), "End - position: " + toPosition, Toast.LENGTH_SHORT).show();
@@ -96,6 +98,10 @@ public class DragListFragment extends Fragment {
         mItemArray = new ArrayList<>();
         //mItemArray.add(new Pair<>((long) 0, "@drawable/ic_keyboard_arrow_up_black_24dp"));
         lastId = -1;
+        for(int i = 0; i<Var.activeBlocks.size(); i++){
+            mItemArray.add(new Pair<>((long) ++lastId, Var.activeBlocks.get(i).iconDrag));
+        }
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(FileName+" ("+(lastId+1)+"/64)");
         setupGridHorizontalRecyclerView();
 
         Button but1=(Button) view.findViewById(R.id.button_forward);
@@ -187,8 +193,8 @@ public class DragListFragment extends Fragment {
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.action_disable_drag).setVisible(mDragListView.isDragEnabled());
-        menu.findItem(R.id.action_enable_drag).setVisible(!mDragListView.isDragEnabled());
+        //menu.findItem(R.id.action_disable_drag).setVisible(mDragListView.isDragEnabled());
+        //menu.findItem(R.id.action_enable_drag).setVisible(!mDragListView.isDragEnabled());
     }
 
 
@@ -221,7 +227,7 @@ public class DragListFragment extends Fragment {
         } else {
             mDragListView.getAdapter().addItem(++lastId, new Pair<>((long) lastId, text));
         }
-        Var.activeBlocks.add(new Modules(idMod));
+        Var.activeBlocks.add(new Modules(idMod,text));
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(FileName+" ("+(lastId+1)+"/64)");
         Var.DragItem = mDragListView;
         Var.LastID = lastId;

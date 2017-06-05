@@ -15,7 +15,7 @@
 -->
 <resources>
     <color name="list_item_background">#AACCCCCC</color>
-    <color name="transparent">#00FFFFFF</color>
+    <color name="transparent">#80000000</color>
     <color name="app_color">#8EAE3C</color>
     <color name="btn_text_color">#faffff</color>
     <color name="background">#e4e4e4</color>

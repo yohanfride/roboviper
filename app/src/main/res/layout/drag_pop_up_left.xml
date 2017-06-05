@@ -22,12 +22,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/Icon"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_margin="20dp"
-                android:src="@drawable/xturnleft"
+                app:srcCompat="@drawable/xturnleft"
                 android:tint="#ffffff" />
 
         </LinearLayout>
@@ -68,7 +68,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#ffffff">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,8 +92,7 @@
                     android:layout_height="56dp"
                     android:layout_weight="1"
                     android:background="@drawable/spinner_background"
-                    android:textColor="#3CA7F0"
-                    />
+                    android:textColor="#3CA7F0" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -101,8 +101,7 @@
                     android:layout_marginRight="5dp"
                     android:background="@drawable/edittext_popup"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/Value1"
@@ -110,13 +109,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:backgroundTint="@android:color/background_light"
+                        android:digits="0123456789."
                         android:ems="10"
                         android:gravity="center"
+                        android:inputType="numberDecimal"
                         android:text="10"
                         android:textColor="@android:color/background_light"
-                        android:textStyle="bold"
-                        android:digits="0123456789."
-                        android:inputType="numberDecimal"/>
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="35dp"
@@ -146,7 +145,6 @@
                 </LinearLayout>
 
 
-
             </LinearLayout>
 
         </LinearLayout>
@@ -159,7 +157,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="15dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
@@ -182,7 +180,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:max="20"/>
+                    android:max="20" />
 
             </LinearLayout>
 
@@ -237,13 +235,13 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:adjustViewBounds="true"
                     android:background="@drawable/delete_background"
                     android:elevation="4dp"
                     android:padding="10dip"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/ic_delete_white_48dp"
-                    android:tint="@android:color/background_light"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"/>
+                    android:tint="@android:color/background_light" />
 
             </LinearLayout>
 

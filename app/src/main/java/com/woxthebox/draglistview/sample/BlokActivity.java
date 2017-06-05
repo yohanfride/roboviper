@@ -23,6 +23,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
+import visualprogammer.Var;
 
 public class BlokActivity extends AppCompatActivity {
 
@@ -30,9 +34,15 @@ public class BlokActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Button btnBlok = (Button) findViewById(R.id.main_button_blok);
+        btnBlok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragment(DragListFragment.newInstance());
+            }
+        });
         if (savedInstanceState == null) {
-            showFragment(DragListFragment.newInstance());
+            //showFragment(DragListFragment.newInstance());
         }
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.app_color)));
@@ -51,9 +61,9 @@ public class BlokActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        boolean listFragment = getSupportFragmentManager().findFragmentByTag("fragment") instanceof DragListFragment;
-        menu.findItem(R.id.action_lists).setVisible(!listFragment);
-        menu.findItem(R.id.action_board).setVisible(listFragment);
+        //boolean listFragment = getSupportFragmentManager().findFragmentByTag("fragment") instanceof DragListFragment;
+        menu.findItem(R.id.action_lists).setVisible(false);
+        menu.findItem(R.id.action_board).setVisible(false);
 
         return true;
     }

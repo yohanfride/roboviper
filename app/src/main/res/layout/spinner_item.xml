@@ -5,4 +5,4 @@
     android:textSize="16sp"
     android:textColor="#3CA7F0"
     android:background="#16D7D7D7"
-    android:paddingLeft="20dp"/>
+    android:paddingLeft="40dp"/>

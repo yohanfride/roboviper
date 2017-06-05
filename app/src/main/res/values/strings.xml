@@ -51,6 +51,14 @@
     <string name="icon_linefol">  Line Follower </string>
 
 
+    <string name="drag_menu_Send">  Send </string>
+    <string name="drag_menu_Save_File">  Save </string>
+    <string name="drag_menu_Open_File">  Open File </string>
+    <string name="drag_menu_New_File">  New File </string>
+    <string name="drag_menu_Code">  Code </string>
+    <string name="drag_menu_Back">  Back </string>
+
+
 
 
     <string name="instructions">Add an image. Then press on image to drag it. Drop it on the grid.</string>

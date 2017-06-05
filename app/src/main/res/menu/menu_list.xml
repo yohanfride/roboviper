@@ -18,23 +18,23 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context=".BlokActivity">
     <item
-        android:id="@+id/action_disable_drag"
-        android:title="@string/action_disable_drag"
+        android:id="@+id/drag_menu_Send"
+        android:title="@string/drag_menu_Send"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/action_enable_drag"
-        android:title="@string/action_enable_drag"
+        android:id="@+id/drag_menu_Save_File"
+        android:title="@string/drag_menu_Save_File"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/action_list"
-        android:title="@string/action_list"
+        android:id="@+id/drag_menu_Open_File"
+        android:title="@string/drag_menu_Open_File"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/action_grid_vertical"
-        android:title="@string/action_grid_vertical"
+        android:id="@+id/drag_menu_New_File"
+        android:title="@string/drag_menu_New_File"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/action_grid_horizontal"
-        android:title="@string/action_grid_horizontal"
+        android:id="@+id/drag_menu_Code"
+        android:title="@string/drag_menu_Code"
         app:showAsAction="never"/>
 </menu>

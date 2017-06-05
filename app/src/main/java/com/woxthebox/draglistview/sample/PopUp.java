@@ -809,7 +809,7 @@ public class PopUp extends Activity{
         ImageButton btnDelete = (ImageButton) findViewById(R.id.deleteButton);
         //Spinner
         addItemsOnSpinner_linefol();
-        addItemsOnSpinner_linefol2();
+        //addItemsOnSpinner_linefol2();
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -861,13 +861,24 @@ public class PopUp extends Activity{
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                List<String> list = new ArrayList<String>();
                 if(pos == 0){
                     BlockNow.tipeData = BlockNow.lfollower1;
-                }if(pos == 1){
+                    list.add("Stop");
+                    list.add("Right");
+                    list.add("Left");
+                }else if(pos == 1){
                     BlockNow.tipeData = BlockNow.lfollower2;
+                    list.add("Stop");
+                    list.add("Right");
+                    if(BlockNow.lfvalue =="01"){BlockNow.lfvalue = "00"; }
                 }else {
                     BlockNow.tipeData = BlockNow.lfollower3;
+                    list.add("Stop");
+                    list.add("Left");
+                    if(BlockNow.lfvalue =="00"){BlockNow.lfvalue = "01";}
                 }
+                addItemsOnSpinner_linefol2(list);
             }
 
             @Override
@@ -883,15 +894,20 @@ public class PopUp extends Activity{
                 R.layout.spinner_item, list);
         dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
-
+        List<String> list2 = new ArrayList<String>();
         int a;
-        if(BlockNow.tipeData == BlockNow.lfollower1) a = 0;
-        else if(BlockNow.tipeData == BlockNow.lfollower2) a = 1;
-        else a = 2;
+        if(BlockNow.tipeData == BlockNow.lfollower1){
+            a = 0;
+        } else if(BlockNow.tipeData == BlockNow.lfollower2){
+            a = 1;
+        }else {
+            a = 2;
+        }
         spinner.setSelection(a);
+        addItemsOnSpinner_linefol2(list);
     }
 
-    public void addItemsOnSpinner_linefol2() {
+    public void addItemsOnSpinner_linefol2(List<String> list) {
 
         spinner = (Spinner) findViewById(R.id.change_mode2);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -911,19 +927,24 @@ public class PopUp extends Activity{
             }
         });
 
-        List<String> list = new ArrayList<String>();
-        list.add("Stop");
-        list.add("Right");
-        list.add("Left");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 R.layout.spinner_item2, list);
         dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
 
         int a;
-        if(BlockNow.lfvalue == "02") a = 0;
-        else if(BlockNow.lfvalue == "00") a = 1;
-        else a = 2;
+        if(BlockNow.tipeData == BlockNow.lfollower1){
+            if(BlockNow.lfvalue == "02") a = 0;
+            else if(BlockNow.lfvalue == "00") a = 1;
+            else a = 2;
+        } else if(BlockNow.tipeData == BlockNow.lfollower2){
+            if(BlockNow.lfvalue == "02") a = 0;
+            else  a = 1;
+        }else {
+            if(BlockNow.lfvalue == "02") a = 0;
+            else a = 1;
+        }
+
         spinner.setSelection(a);
     }
 }

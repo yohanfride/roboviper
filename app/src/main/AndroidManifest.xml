@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PopUp"
-            android:theme="@style/AppTheme.PopUpTheme">
+            android:theme="@style/AppTheme.PopUpTheme2">
         </activity>
 
     </application>

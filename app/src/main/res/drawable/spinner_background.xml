@@ -8,7 +8,12 @@
                     <solid android:color="#16D7D7D7" />
                 </shape>
             </item>
-            <item ><bitmap android:gravity="left|center" android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+            <item android:left="10dp">
+                <bitmap
+                    android:gravity="left|center"
+                    android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+
+                    />
             </item>
         </layer-list>
     </item>
