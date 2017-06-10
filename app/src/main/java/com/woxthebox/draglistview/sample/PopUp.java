@@ -65,6 +65,8 @@ public class PopUp extends Activity{
             lineFol();
         }else if(TipeNow == Var.SOUND_ID){
             sound();
+        } else if(TipeNow == Var.INFO_ID){
+            sourceCode();
         }
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -947,5 +949,14 @@ public class PopUp extends Activity{
 
         spinner.setSelection(a);
     }
+
+    private void sourceCode(){
+        setContentView(R.layout.drag_pop_up_source_code);
+        TextView sourceCode = (TextView) findViewById(R.id.TextCode);
+        for(int i=0; i<Var.activeBlocks.size(); i++){
+            sourceCode.setText(sourceCode.getText()+"\n"+Var.activeBlocks.get(i).getCode());
+        }
+    }
+
 }
 

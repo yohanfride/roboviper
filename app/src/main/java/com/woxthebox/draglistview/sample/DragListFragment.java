@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
@@ -29,15 +28,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.woxthebox.draglistview.DragItem;
 import com.woxthebox.draglistview.DragListView;
 import com.woxthebox.draglistview.swipe.ListSwipeHelper;
+
 import visualprogammer.Var;
 
 import java.util.ArrayList;
@@ -64,6 +64,7 @@ public class DragListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.drag_list_layout2, container, false);
+        Var.lastFragment = "Drag List";
         FileName = "Roboviper Canvas";
         mRefreshLayout = (MySwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mRefreshLayout.setEnabled(false);
@@ -175,6 +176,8 @@ public class DragListFragment extends Fragment {
             }
         });
 
+
+
         return view;
     }
 
@@ -196,6 +199,22 @@ public class DragListFragment extends Fragment {
         //menu.findItem(R.id.action_disable_drag).setVisible(mDragListView.isDragEnabled());
         //menu.findItem(R.id.action_enable_drag).setVisible(!mDragListView.isDragEnabled());
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.drag_menu_Code:
+                Intent intent = new Intent(getActivity(), PopUpSourceCode.class);
+                startActivity(intent);
+                return true;
+            case R.id.drag_menu_Send:
+                Intent intent2 = new Intent(getActivity(), DeviceListActivity.class);
+                startActivity(intent2);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
     private void setupGridHorizontalRecyclerView() {
@@ -221,6 +240,7 @@ public class DragListFragment extends Fragment {
     }
 
     public void addList(String text, int idMod) {
+        Var.isSaved = false;
         if(lastId<0){
             mItemArray.add(new Pair<>((long) ++lastId, text));
             setupGridHorizontalRecyclerView();
@@ -237,4 +257,6 @@ public class DragListFragment extends Fragment {
         super.onResume();
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(FileName+" ("+(lastId+1)+"/64)");
     }
+
+
 }

@@ -16,7 +16,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context=".BlokActivity">
+      tools:context=".MainActivity">
     <item
         android:id="@+id/drag_menu_Send"
         android:title="@string/drag_menu_Send"

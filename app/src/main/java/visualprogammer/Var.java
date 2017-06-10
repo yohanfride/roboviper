@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.media.Image;
+import android.util.Log;
 import android.view.Display;
 
 import java.util.ArrayList;
@@ -17,10 +18,11 @@ public class Var {
 	public static String dataPath="/sdcard/RoboViper/data/";
 	public static String outputPath="/sdcard/RoboViper/output/";
 	public static String fileName="";
+	public static String lastFragment = "";
 	public static boolean isExiting=false;
 	public static boolean isNew=false;
 	public static boolean isDeploy=false;
-	public static boolean isSaved=false;
+	public static boolean isSaved=true;
 	public static boolean forwardActive=false,
 			   reverseActive=false,
 			   tleftActive=false,
@@ -111,6 +113,7 @@ public class Var {
     public static ServiceBluetooth service_data_io = null;
     public static DragListView DragItem;
 	public static int LastID;
+	public static String BlAddress;
 
 	public static void order(int fromPosition, int toPosition){
 		ArrayList<Modules> newactiveBlocks= new ArrayList<Modules>();
@@ -143,4 +146,125 @@ public class Var {
 		}
 		activeBlocks = newactiveBlocks;
 	}
+
+	private String decimalToHex(int a) {
+		String h = Integer.toHexString(a);
+		if (h.length() < 2) {
+			h = "0" + h;
+		}
+		return h;
+	}
+	private String asciiData(char c){
+		int a=(int)c;
+		if(a>=0 && (a+40) < 255){
+			return decimalToHex(a);
+		}
+		return "";
+	}
+	public static byte[] hexToByte(String s) throws Exception {
+		if ("0x".equals(s.substring(0, 2))) {
+			s = s.substring(2);
+		}
+		Log.d("MonitorActivity",s);
+		byte[] baKeyword = new byte[s.length() / 2];
+		for (int i = 0; i < baKeyword.length; i++) {
+			try {
+				baKeyword[i] = (byte) (0xff & Integer.parseInt(s.substring(
+						i * 2, i * 2 + 2), 16));
+				Log.d("MonitorActivity",baKeyword[i]+",");
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			}
+		}
+		return baKeyword;
+	}
+
+	public String compileData(String data){
+
+		String[] programData=data.split(";");
+		String hexData="";
+
+		for(int i=0; i<programData.length; i++){
+			String[] blockData;
+			blockData=programData[i].split(",");
+
+			Modules m=new Modules(0,"");
+
+			if(blockData[0].equalsIgnoreCase(m.fwd1)){
+				hexData+="ff"+"000000"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[2]));
+			}
+			else if(blockData[0].equalsIgnoreCase(m.fwd2)){
+				hexData+="ff"+"000001"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]));
+			}
+			else if(blockData[0].equalsIgnoreCase(m.wfollower1)){
+				if(blockData[1].equals(m.wfgaris))
+					hexData+="ff"+"040100"+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[3]))+decimalToHex(Integer.parseInt(blockData[4]));
+				else
+					hexData+="ff"+"040101"+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[3]))+decimalToHex(Integer.parseInt(blockData[4]));
+			}
+			else if(blockData[0].equalsIgnoreCase(m.wfollower2)){
+				if(blockData[1].equals(m.wfgaris))
+					hexData+="ff"+"040000"+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[3]))+decimalToHex(Integer.parseInt(blockData[4]));
+				else
+					hexData+="ff"+"040001"+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[3]))+decimalToHex(Integer.parseInt(blockData[4]));
+			}
+			else if(blockData[0].equalsIgnoreCase(m.lfollower1)){
+				hexData+="ff"+"0502"+blockData[1]+decimalToHex(Integer.parseInt(blockData[2]));
+			}
+			else if(blockData[0].equalsIgnoreCase(m.lfollower2)){
+				hexData+="ff"+"0500"+blockData[1]+decimalToHex(Integer.parseInt(blockData[2]));
+			}
+			else if(blockData[0].equalsIgnoreCase(m.lfollower3)){
+				hexData+="ff"+"0501"+blockData[1]+decimalToHex(Integer.parseInt(blockData[2]));
+			}
+			else if(blockData[0].equalsIgnoreCase(m.reverse1)){
+				hexData+="ff"+"000100"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[2]));
+			}
+			else if(blockData[0].equalsIgnoreCase(m.reverse2)){
+				hexData+="ff"+"000101"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]));
+			}
+			else if(blockData[0].equalsIgnoreCase(m.tright1)){
+				hexData+="ff"+"000200"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[2]));
+			}
+			else if(blockData[0].equalsIgnoreCase(m.tright2)){
+				hexData+="ff"+"000201"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[2]));
+			}
+			else if(blockData[0].equalsIgnoreCase(m.tleft1)){
+				hexData+="ff"+"000300"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[2]));
+			}
+			else if(blockData[0].equalsIgnoreCase(m.tleft2)){
+				hexData+="ff"+"000301"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[2]));
+			}
+			else if(blockData[0].equalsIgnoreCase(m.lcd)){
+				int num=Integer.parseInt(blockData[1]);
+				String text=blockData[2];
+
+				hexData+="ff"+"08"+decimalToHex(Integer.parseInt(blockData[1]));
+				for (int x = 0; x < num; x++) {
+					hexData+= asciiData(text.charAt(x));
+				}
+			}
+			else if(blockData[0].equalsIgnoreCase(m.sMonostable)){
+				hexData+="ff"+"07"+"00"+decimalToHex(Integer.parseInt(blockData[1]));
+			}
+			else if(blockData[0].equalsIgnoreCase(m.sAstable)){
+				hexData+="ff"+"07"+"01"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[3]));
+			}
+			else if(blockData[0].equalsIgnoreCase(m.sMario)){
+				hexData+="ff"+"07"+"02";
+			}
+			else if(blockData[0].equalsIgnoreCase(m.delay)){
+				hexData+="ff"+"09"+decimalToHex(Integer.parseInt(blockData[1]));
+			}
+			else if(blockData[0].equalsIgnoreCase(m.gripper1)){
+				hexData+="ff"+"06"+"02"+"00";
+			}
+			else if(blockData[0].equalsIgnoreCase(m.gripper2)){
+				hexData+="ff"+"06"+"02"+"01";
+			}
+		}
+		return hexData;
+	}
+
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Definig a container for you List Item-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center_vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/list_content_item_layout"
+    android:layout_marginBottom="10dp"
+    >
+
+    <!-- Defining where should text be placed. You set you text color here-->
+ <TextView
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     android:id="@+id/item_content"
+     android:textColor="#2C3D4E"
+     android:gravity="left"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:text="Code"
+     android:textSize="14sp"
+     android:fontFamily="serif-monospace"
+     />
+</LinearLayout>
