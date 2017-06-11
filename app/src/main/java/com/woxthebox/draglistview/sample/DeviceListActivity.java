@@ -27,6 +27,8 @@ import android.widget.Toast;
 
 import visualprogammer.Var;
 
+import static com.woxthebox.draglistview.sample.DragListFragment.setup;
+
 
 public class DeviceListActivity extends Activity {
 
@@ -50,14 +52,6 @@ public class DeviceListActivity extends Activity {
         setResult(Activity.RESULT_CANCELED);
         titleSearch=(TextView) findViewById(R.id.title_paired_devices);
 
-        scanButton = (Button) findViewById(R.id.button_scan);
-        scanButton.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                titleSearch.setText(R.string.title_other_devices);
-                doDiscovery();
-                //v.setVisibility(View.GONE);
-            }
-        });
 
         //mPairedDevicesArrayAdapter = new ArrayAdapter<String>(this, R.layout.device_name);
         mNewDevicesArrayAdapter = new ArrayAdapter<String>(this, R.layout.device_name);
@@ -70,12 +64,26 @@ public class DeviceListActivity extends Activity {
         ListView newDevicesListView = (ListView) findViewById(R.id.new_devices);
         newDevicesListView.setAdapter(mNewDevicesArrayAdapter);
         newDevicesListView.setOnItemClickListener(mDeviceClickListener);
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (!mBluetoothAdapter.isEnabled()){
+            Intent intentBtEnabled = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            int REQUEST_ENABLE_BT = 1;
+            startActivityForResult(intentBtEnabled, REQUEST_ENABLE_BT);
+        }
         mBtAdapter = BluetoothAdapter.getDefaultAdapter();
         Var.bluetooth_adapter = BluetoothAdapter.getDefaultAdapter();
         if (Var.bluetooth_adapter == null) {
             Toast.makeText(this, "Bluetooth is not available", Toast.LENGTH_LONG).show();
         }
 
+        scanButton = (Button) findViewById(R.id.button_scan);
+        scanButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                titleSearch.setText(R.string.title_other_devices);
+                doDiscovery();
+                //v.setVisibility(View.GONE);
+            }
+        });
         /*IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         this.registerReceiver(mReceiver, filter);
 
@@ -102,6 +110,8 @@ public class DeviceListActivity extends Activity {
             //mPairedDevicesArrayAdapter.add(noDevices);
         }*/
     }
+
+
 
     @Override
     protected void onDestroy() {
@@ -156,16 +166,17 @@ public class DeviceListActivity extends Activity {
 
             mBtAdapter.cancelDiscovery();
 
-
+            setup();
             String info = ((TextView) v).getText().toString();
+            String info2 = info.substring(0,info.length() - 17);
             String address = info.substring(info.length() - 17);
 
-            Var.namadevice_connect = info;
+            Var.namadevice_connect = info2;
             Var.BlAddress = address;
+            BluetoothDevice device = Var.bluetooth_adapter.getRemoteDevice(address);
+            Var.service_data_io.connect(device);
 
-            //Intent intent = new Intent();
-            //intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
-            //setResult(Activity.RESULT_OK, intent);
+            Toast.makeText(getApplicationContext(), "Connect to "+ Var.namadevice_connect, Toast.LENGTH_SHORT).show();
             finish();
         }
     };

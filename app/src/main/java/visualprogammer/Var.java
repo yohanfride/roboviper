@@ -113,7 +113,7 @@ public class Var {
     public static ServiceBluetooth service_data_io = null;
     public static DragListView DragItem;
 	public static int LastID;
-	public static String BlAddress;
+	public static String BlAddress="";
 
 	public static void order(int fromPosition, int toPosition){
 		ArrayList<Modules> newactiveBlocks= new ArrayList<Modules>();

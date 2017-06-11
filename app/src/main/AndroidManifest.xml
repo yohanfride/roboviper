@@ -44,6 +44,9 @@
        <activity android:name=".PopUpSourceCode"
             android:theme="@style/AppTheme.PopUpTheme2">
         </activity>
+        <activity android:name=".SaveDialogActivity"
+            android:theme="@style/AppTheme.PopUpTheme2">
+        </activity>
         <activity
             android:name="DeviceListActivity"></activity>
 

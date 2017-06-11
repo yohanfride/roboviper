@@ -117,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                        Intent intent = new Intent(getApplicationContext(), SaveDialogActivity.class);
+                        startActivity(intent);
+                        onBackPressed();
                     }
                 });
                 builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -137,96 +140,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-
-    private void setup() {
-        Var.service_data_io = new ServiceBluetooth(this, mHandler);
-        Var.output_string = new StringBuffer("");
-    }
-    public void connect(){
-        Intent serverIntent = new Intent(this, DeviceListActivity.class);
-        startActivityForResult(serverIntent, Var.REQUEST_CONNECT_DEVICE);
-    }
-    public void onDestroy() {
-        super.onDestroy();
-        if (Var.service_data_io != null) Var.service_data_io.stop();
-    }
-    private void sendMessage1(byte[] message) {
-        if (Var.service_data_io.getState() != ServiceBluetooth.STATE_CONNECTED) {
-            Toast.makeText(this, "Pengiriman data gagal", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Var.service_data_io.write(message);
-        Var.output_string.setLength(0);
-    }
-    private void sendMessage(String message) {
-        if (Var.service_data_io.getState() != ServiceBluetooth.STATE_CONNECTED) {
-            Toast.makeText(this, "Pengiriman data gagal", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (message.length() > 0) {
-            byte[] send = message.getBytes();
-            Var.service_data_io.write(send);
-            Var.output_string.setLength(0);
-        }
-    }
-
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case Var.MESSAGE_STATE_CHANGE:
-                    switch (msg.arg1) {
-                        case ServiceBluetooth.STATE_CONNECTED:
-                            stat.setText("Tersambung ke : "+Var.namadevice_connect);
-                            break;
-                        case ServiceBluetooth.STATE_CONNECTING:
-                            stat.setText(R.string.title_connecting);
-                            break;
-                        case ServiceBluetooth.STATE_LISTEN:
-                        case ServiceBluetooth.STATE_NONE:
-                            stat.setText(R.string.title_not_connected);
-                            break;
-                    }
-                    break;
-                case Var.MESSAGE_DEVICE_NAME:
-
-                    Var.namadevice_connect = msg.getData().getString(Var.DEVICE_NAME);
-                    Toast.makeText(getApplicationContext(), "Tersambung ke "
-                            + Var.namadevice_connect, Toast.LENGTH_SHORT).show();
-                    break;
-
-                case Var.MESSAGE_READ:
-
-                    break;
-
-                case Var.MESSAGE_TOAST:
-                    Toast.makeText(getApplicationContext(), msg.getData().getString(Var.TOAST),
-                            Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }
-    };
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case Var.REQUEST_CONNECT_DEVICE:
-
-                if (resultCode == Activity.RESULT_OK) {
-
-                    String address = data.getExtras()
-                            .getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
-                    ///Konek Bluetooth
-                    BluetoothDevice device = Var.bluetooth_adapter.getRemoteDevice(address);
-                    Var.service_data_io.connect(device);
-                }
-                break;
-            case Var.REQUEST_ENABLE_BT:
-                if (resultCode == Activity.RESULT_OK) {
-                    setup();
-                } else {
-                    Toast.makeText(this, R.string.bt_not_enabled, Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-        }
-    }
 }

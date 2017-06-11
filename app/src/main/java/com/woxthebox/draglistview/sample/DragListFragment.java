@@ -16,9 +16,13 @@
 
 package com.woxthebox.draglistview.sample;
 
+import android.app.Activity;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
@@ -33,19 +37,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.woxthebox.draglistview.DragItem;
 import com.woxthebox.draglistview.DragListView;
 import com.woxthebox.draglistview.swipe.ListSwipeHelper;
 
+import visualprogammer.Files;
+import visualprogammer.ServiceBluetooth;
 import visualprogammer.Var;
 
 import java.util.ArrayList;
 
+import static visualprogammer.Var.hexToByte;
+
 public class DragListFragment extends Fragment {
 
     private ArrayList<Pair<Long, String>> mItemArray;
-    private DragListView mDragListView;
+    private static DragListView mDragListView;
     private ListSwipeHelper mSwipeHelper;
     private MySwipeRefreshLayout mRefreshLayout;
     public static int lastId=0;
@@ -65,7 +74,11 @@ public class DragListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.drag_list_layout2, container, false);
         Var.lastFragment = "Drag List";
-        FileName = "Roboviper Canvas";
+        if(Var.fileName.isEmpty())
+            FileName = "Roboviper Canvas";
+        else
+            FileName = Var.fileName;
+
         mRefreshLayout = (MySwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mRefreshLayout.setEnabled(false);
         mDragListView = (DragListView) view.findViewById(R.id.drag_list_view);
@@ -208,14 +221,138 @@ public class DragListFragment extends Fragment {
                 startActivity(intent);
                 return true;
             case R.id.drag_menu_Send:
-                Intent intent2 = new Intent(getActivity(), DeviceListActivity.class);
-                startActivity(intent2);
+                if(Var.BlAddress.isEmpty()) {
+                    Intent intent2 = new Intent(getActivity(), DeviceListActivity.class);
+                    startActivity(intent2);
+                 } else {
+                    deploy();
+                }
+            case R.id.drag_menu_Save_File:
+                if(Var.fileName.isEmpty()) {
+                    Intent intent3 = new Intent(getActivity(), SaveDialogActivity.class);
+                    startActivity(intent3);
+                } else {
+                    saveFile();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    public static void saveFile(){
+        Files f= new Files();
+        Modules m=new Modules(0,"");
+        String temp = "";
+        for(int i=0; i<Var.activeBlocks.size(); i++){
+            temp+=m.extractDataSave(Var.activeBlocks.get(i))+";";
+        }
+        f.saveData(temp, Var.dataPath+Var.fileName+".txt");
+        f.saveData(temp, Var.outputPath+Var.fileName+".hex");
+        Toast.makeText(mDragListView.getContext(), "Saved", Toast.LENGTH_SHORT).show();
+    }
 
+    public String compileData(String data){
+
+        String[] programData=data.split(";");
+        String hexData="";
+
+        for(int i=0; i<programData.length; i++){
+            String[] blockData;
+            blockData=programData[i].split(",");
+
+            Modules m=new Modules(0,"");
+
+            if(blockData[0].equalsIgnoreCase(m.fwd1)){
+                hexData+="ff"+"000000"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[2]));
+            }
+            else if(blockData[0].equalsIgnoreCase(m.fwd2)){
+                hexData+="ff"+"000001"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]));
+            }
+            else if(blockData[0].equalsIgnoreCase(m.wfollower1)){
+                if(blockData[1].equals(m.wfgaris))
+                    hexData+="ff"+"040100"+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[3]))+decimalToHex(Integer.parseInt(blockData[4]));
+                else
+                    hexData+="ff"+"040101"+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[3]))+decimalToHex(Integer.parseInt(blockData[4]));
+            }
+            else if(blockData[0].equalsIgnoreCase(m.wfollower2)){
+                if(blockData[1].equals(m.wfgaris))
+                    hexData+="ff"+"040000"+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[3]))+decimalToHex(Integer.parseInt(blockData[4]));
+                else
+                    hexData+="ff"+"040001"+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[3]))+decimalToHex(Integer.parseInt(blockData[4]));
+            }
+            else if(blockData[0].equalsIgnoreCase(m.lfollower1)){
+                hexData+="ff"+"0502"+blockData[1]+decimalToHex(Integer.parseInt(blockData[2]));
+            }
+            else if(blockData[0].equalsIgnoreCase(m.lfollower2)){
+                hexData+="ff"+"0500"+blockData[1]+decimalToHex(Integer.parseInt(blockData[2]));
+            }
+            else if(blockData[0].equalsIgnoreCase(m.lfollower3)){
+                hexData+="ff"+"0501"+blockData[1]+decimalToHex(Integer.parseInt(blockData[2]));
+            }
+            else if(blockData[0].equalsIgnoreCase(m.reverse1)){
+                hexData+="ff"+"000100"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[2]));
+            }
+            else if(blockData[0].equalsIgnoreCase(m.reverse2)){
+                hexData+="ff"+"000101"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]));
+            }
+            else if(blockData[0].equalsIgnoreCase(m.tright1)){
+                hexData+="ff"+"000200"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[2]));
+            }
+            else if(blockData[0].equalsIgnoreCase(m.tright2)){
+                hexData+="ff"+"000201"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[2]));
+            }
+            else if(blockData[0].equalsIgnoreCase(m.tleft1)){
+                hexData+="ff"+"000300"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[2]));
+            }
+            else if(blockData[0].equalsIgnoreCase(m.tleft2)){
+                hexData+="ff"+"000301"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[2]));
+            }
+            else if(blockData[0].equalsIgnoreCase(m.lcd)){
+                int num=Integer.parseInt(blockData[1]);
+                String text=blockData[2];
+
+                hexData+="ff"+"08"+decimalToHex(Integer.parseInt(blockData[1]));
+                for (int x = 0; x < num; x++) {
+                    hexData+= asciiData(text.charAt(x));
+                }
+            }
+            else if(blockData[0].equalsIgnoreCase(m.sMonostable)){
+                hexData+="ff"+"07"+"00"+decimalToHex(Integer.parseInt(blockData[1]));
+            }
+            else if(blockData[0].equalsIgnoreCase(m.sAstable)){
+                hexData+="ff"+"07"+"01"+decimalToHex(Integer.parseInt(blockData[1]))+decimalToHex(Integer.parseInt(blockData[2]))+decimalToHex(Integer.parseInt(blockData[3]));
+            }
+            else if(blockData[0].equalsIgnoreCase(m.sMario)){
+                hexData+="ff"+"07"+"02";
+            }
+            else if(blockData[0].equalsIgnoreCase(m.delay)){
+                hexData+="ff"+"09"+decimalToHex(Integer.parseInt(blockData[1]));
+            }
+            else if(blockData[0].equalsIgnoreCase(m.gripper1)){
+                hexData+="ff"+"06"+"02"+"00";
+            }
+            else if(blockData[0].equalsIgnoreCase(m.gripper2)){
+                hexData+="ff"+"06"+"02"+"01";
+            }
+        }
+        return hexData;
+    }
+
+
+    private void deploy(){
+        Modules m=new Modules(0,"");
+        String temp = "";
+        for(int i=0; i<Var.activeBlocks.size(); i++){
+            temp+=m.extractDataSave(Var.activeBlocks.get(i))+";";
+        }
+        String data=compileData(temp);
+        try {
+            Toast.makeText(mDragListView.getContext(), data, Toast.LENGTH_LONG).show();
+            sendMessage1(hexToByte(data));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private void setupGridHorizontalRecyclerView() {
         mDragListView.setLayoutManager(new GridLayoutManager(getContext(), 1, LinearLayoutManager.HORIZONTAL, false));
@@ -258,5 +395,111 @@ public class DragListFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(FileName+" ("+(lastId+1)+"/64)");
     }
 
+    public static void setup() {
+        Var.service_data_io = new ServiceBluetooth(mDragListView.getContext(), mHandler);
+        Var.output_string = new StringBuffer("");
+    }
+    public void connect(){
+        Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
+        startActivityForResult(serverIntent, Var.REQUEST_CONNECT_DEVICE);
+    }
+    public void onDestroy() {
+        super.onDestroy();
+        if (Var.service_data_io != null) Var.service_data_io.stop();
+    }
+    private void sendMessage1(byte[] message) {
+        if (Var.service_data_io.getState() != ServiceBluetooth.STATE_CONNECTED) {
+            Toast.makeText(mDragListView.getContext(), "failed to deliver data", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Var.service_data_io.write(message);
+        Var.output_string.setLength(0);
+    }
+    private void sendMessage(String message) {
+        if (Var.service_data_io.getState() != ServiceBluetooth.STATE_CONNECTED) {
+            Toast.makeText(mDragListView.getContext(), "failed to deliver data", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        if (message.length() > 0) {
+            byte[] send = message.getBytes();
+            Var.service_data_io.write(send);
+            Var.output_string.setLength(0);
+        }
+    }
+    private String decimalToHex(int a) {
+        String h = Integer.toHexString(a);
+        if (h.length() < 2) {
+            h = "0" + h;
+        }
+        return h;
+    }
+    private String asciiData(char c){
+        int a=(int)c;
+        if(a>=0 && (a+40) < 255){
+            return decimalToHex(a);
+        }
+        return "";
+    }
+
+    private static final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case Var.MESSAGE_STATE_CHANGE:
+                    switch (msg.arg1) {
+                        case ServiceBluetooth.STATE_CONNECTED:
+                            //stat.setText("Tersambung ke : "+Var.namadevice_connect);
+                            break;
+                        case ServiceBluetooth.STATE_CONNECTING:
+                            //stat.setText(R.string.title_connecting);
+                            break;
+                        case ServiceBluetooth.STATE_LISTEN:
+                        case ServiceBluetooth.STATE_NONE:
+                            //stat.setText(R.string.title_not_connected);
+                            break;
+                    }
+                    break;
+                case Var.MESSAGE_DEVICE_NAME:
+
+                    Var.namadevice_connect = msg.getData().getString(Var.DEVICE_NAME);
+                    Toast.makeText(mDragListView.getContext(), "Tersambung ke "
+                            + Var.namadevice_connect, Toast.LENGTH_SHORT).show();
+                    break;
+
+                case Var.MESSAGE_READ:
+
+                    break;
+
+                case Var.MESSAGE_TOAST:
+                    Toast.makeText(mDragListView.getContext(), msg.getData().getString(Var.TOAST),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case Var.REQUEST_CONNECT_DEVICE:
+
+                if (resultCode == Activity.RESULT_OK) {
+
+                    String address = data.getExtras()
+                            .getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+                    ///Konek Bluetooth
+                    BluetoothDevice device = Var.bluetooth_adapter.getRemoteDevice(address);
+                    Var.service_data_io.connect(device);
+                    Toast.makeText(mDragListView.getContext(), R.string.bt_not_enabled+" 2", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case Var.REQUEST_ENABLE_BT:
+                if (resultCode == Activity.RESULT_OK) {
+                    Toast.makeText(mDragListView.getContext(), R.string.bt_not_enabled+" 1", Toast.LENGTH_SHORT).show();
+                    setup();
+                } else {
+                    Toast.makeText(mDragListView.getContext(), R.string.bt_not_enabled, Toast.LENGTH_SHORT).show();
+                    //finish();
+                }
+        }
+    }
 }
