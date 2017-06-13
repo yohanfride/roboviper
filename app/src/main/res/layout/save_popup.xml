@@ -23,8 +23,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#3CA7F0"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="File name" />
+            android:inputType="textPersonName" />
     </LinearLayout>
 
     <LinearLayout

@@ -221,12 +221,14 @@ public class DragListFragment extends Fragment {
                 startActivity(intent);
                 return true;
             case R.id.drag_menu_Send:
+                Var.isExiting = false;
                 if(Var.BlAddress.isEmpty()) {
                     Intent intent2 = new Intent(getActivity(), DeviceListActivity.class);
                     startActivity(intent2);
-                 } else {
+                } else {
                     deploy();
                 }
+                return true;
             case R.id.drag_menu_Save_File:
                 if(Var.fileName.isEmpty()) {
                     Intent intent3 = new Intent(getActivity(), SaveDialogActivity.class);

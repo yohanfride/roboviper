@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+        Var.isExiting = true;
         int count = getFragmentManager().getBackStackEntryCount();
         if (count == 0) {
             super.onBackPressed();
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK) {
-            if(Var.isSaved == false){
+            if( (Var.isSaved == false)  ){
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Confirm");
                 builder.setMessage("Do you want previous save program?");
