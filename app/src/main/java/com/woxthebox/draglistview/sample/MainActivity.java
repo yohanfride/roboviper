@@ -37,6 +37,8 @@ import android.widget.Toast;
 
 import visualprogammer.*;
 
+import static com.woxthebox.draglistview.sample.DragListFragment.saveFile;
+
 public class MainActivity extends AppCompatActivity {
     public Texts stat;
 
@@ -49,13 +51,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Var.activeBlocks.clear();
+                Var.fileName="";
                 showFragment(DragListFragment.newInstance());
             }
         });
         if (savedInstanceState == null) {
             //showFragment(DragListFragment.newInstance());
         }
+        Button btnFile = (Button) findViewById(R.id.main_button_file);
+        btnFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Var.activeBlocks.clear();
+                Intent intent = new Intent(getApplication(), OpenFileActivity.class);
+                startActivity(intent);
+            }
+        });
         Var.lastFragment = "";
+
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.app_color)));
     }
 
@@ -98,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         Var.isExiting = true;
+        getSupportActionBar().setTitle(R.string.app_name);
         int count = getFragmentManager().getBackStackEntryCount();
         if (count == 0) {
             super.onBackPressed();
@@ -105,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             getFragmentManager().popBackStack();
         }
+        Var.isSaved = true;
         Var.lastFragment = "";
     }
 
@@ -118,8 +133,12 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        Intent intent = new Intent(getApplicationContext(), SaveDialogActivity.class);
-                        startActivity(intent);
+                        if( (Var.fileName.isEmpty())  ){
+                            Intent intent = new Intent(getApplicationContext(), SaveDialogActivity.class);
+                            startActivity(intent);
+                        } else {
+                            saveFile();
+                        }
                         onBackPressed();
                     }
                 });
@@ -134,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
                 alert.show();
             } else {
                 super.onBackPressed();
+                getSupportActionBar().setTitle(R.string.app_name);
                 Var.lastFragment = "";
             }
             return true;

@@ -841,7 +841,7 @@ public class PopUp extends Activity{
                     @Override
                     public void onStopTrackingTouch(SeekBar seekBar) {
                         String test = seekBar.getProgress()+"";
-                        BlockNow.trspeed = test;
+                        BlockNow.lfspeed = test;
                     }
 
                     @Override

@@ -267,4 +267,89 @@ public class Var {
 		return hexData;
 	}
 
+	public static void generateActiveBlocks(String data){
+
+		String[] programData=data.split(";");
+
+		for(int i=0; i<programData.length; i++){
+			String[] blockData;
+			blockData=programData[i].split(",");
+
+			Modules dropzone = new Modules(1," ") ;
+
+			if(blockData[0].equalsIgnoreCase(dropzone.fwd1) || blockData[0].equalsIgnoreCase(dropzone.fwd2)){
+				dropzone= new Modules(Var.FORWARD_ID,"@drawable/xforwardbox") ;
+				dropzone.tipeData=blockData[0];
+				dropzone.fvalue=blockData[1];
+				dropzone.fspeed=blockData[2];
+			}
+			else if(blockData[0].equalsIgnoreCase(dropzone.reverse1) || blockData[0].equalsIgnoreCase(dropzone.reverse2)){
+				dropzone= new Modules(Var.REVERSE_ID,"@drawable/xbackwardbox") ;
+				dropzone.tipeData=blockData[0];
+				dropzone.rvalue=blockData[1];
+				dropzone.rspeed=blockData[2];
+
+				//if(dropzone.tipeData.equalsIgnoreCase(dropzone.reverse1)) dropzone.setImageResource(R.drawable.mundur_waktu);
+				//else dropzone.setImageResource(R.drawable.mundur_jarak);
+			}
+			else if(blockData[0].equalsIgnoreCase(dropzone.tleft1) || blockData[0].equalsIgnoreCase(dropzone.tleft2)){
+				dropzone= new Modules(Var.TLEFT_ID,"@drawable/xturnleftbox") ;
+				dropzone.tipeData=blockData[0];
+				dropzone.tlvalue=blockData[1];
+				dropzone.tlspeed=blockData[2];
+
+				//if(dropzone.tipeData.equalsIgnoreCase(dropzone.tleft1)) dropzone.setImageResource(R.drawable.belki_waktu);
+				//else dropzone.setImageResource(R.drawable.belki_sudut);
+			}
+			else if(blockData[0].equalsIgnoreCase(dropzone.tright1) || blockData[0].equalsIgnoreCase(dropzone.tright2)){
+				dropzone= new Modules(Var.TRIGHT_ID,"@drawable/xturnrightbox") ;
+				dropzone.tipeData=blockData[0];
+				dropzone.tlvalue=blockData[1];
+				dropzone.tlspeed=blockData[2];
+
+				//if(dropzone.tipeData.equalsIgnoreCase(dropzone.tright1)) dropzone.setImageResource(R.drawable.belka_waktu);
+				//else dropzone.setImageResource(R.drawable.belka_sudut);
+			}
+			else if(blockData[0].equalsIgnoreCase(dropzone.lcd)){
+				dropzone= new Modules(Var.LCD_ID,"@drawable/xdisplaybox") ;
+				dropzone.tipeData=blockData[0];
+				dropzone.lcdChar=blockData[2];
+			}
+			else if(blockData[0].equalsIgnoreCase(dropzone.sMonostable)){
+				dropzone= new Modules(Var.SOUND_ID,"@drawable/xsoundbox") ;
+				dropzone.tipeData=blockData[0];
+				dropzone.monosOn=blockData[1];
+			}
+			else if(blockData[0].equalsIgnoreCase(dropzone.sAstable)){
+				dropzone= new Modules(Var.SOUND_ID,"@drawable/xsoundbox") ;
+				dropzone.tipeData=blockData[0];
+				dropzone.astaOn=blockData[1];
+				dropzone.astaOff=blockData[2];
+				dropzone.astaLoop=blockData[3];
+			}
+			else if(blockData[0].equalsIgnoreCase(dropzone.sMario)){
+				dropzone= new Modules(Var.SOUND_ID,"@drawable/xsoundbox") ;
+				dropzone.tipeData=blockData[0];
+			}
+			else if(blockData[0].equalsIgnoreCase(dropzone.delay)){
+				dropzone= new Modules(Var.DELAY_ID,"@drawable/xdelaybox") ;
+				dropzone.tipeData=blockData[0];
+				dropzone.dvalue=blockData[1];
+			}
+			else if(blockData[0].equalsIgnoreCase(dropzone.gripper1) || blockData[0].equalsIgnoreCase(dropzone.gripper2)){
+				dropzone= new Modules(Var.GRIPPER_ID,"@drawable/xgripperbox") ;
+				dropzone.tipeData=blockData[0];
+			}
+			else if(blockData[0].equalsIgnoreCase(dropzone.lfollower1) ||
+					blockData[0].equalsIgnoreCase(dropzone.lfollower2) ||
+					blockData[0].equalsIgnoreCase(dropzone.lfollower3)){
+				dropzone= new Modules(Var.LFOLLOWER_ID,"@drawable/xlinefollbox") ;
+				dropzone.tipeData=blockData[0];
+				dropzone.lfvalue=blockData[1];
+				dropzone.lfspeed=blockData[2];
+			}
+			dropzone.mEmpty=false;
+			activeBlocks.add(dropzone);
+		}
+	}
 }

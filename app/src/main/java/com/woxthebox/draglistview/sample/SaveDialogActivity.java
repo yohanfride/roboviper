@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 import visualprogammer.*;
 
+import static com.woxthebox.draglistview.sample.DragListFragment.FileName;
+import static com.woxthebox.draglistview.sample.DragListFragment.lastId;
+
 public class SaveDialogActivity extends Activity {
 	EditText input;
 	Button cancel, save;
@@ -56,7 +59,7 @@ public class SaveDialogActivity extends Activity {
 				}
 				f.saveData(temp, Var.dataPath+Var.fileName+".txt");
 				f.saveData(temp, Var.outputPath+Var.fileName+".hex");
-				Toast.makeText(getApplicationContext(), "Data telah tersimpan", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
 				Var.isSaved=true;
 				
 				if(Var.isExiting==true){
@@ -71,8 +74,8 @@ public class SaveDialogActivity extends Activity {
 		            	//BuildUiActivity.modulParent.setVisibility(View.VISIBLE);
 		            }
 		        }, 100L);
+				FileName = Var.fileName;
 				finish();
-
 			}
 		});
 	}

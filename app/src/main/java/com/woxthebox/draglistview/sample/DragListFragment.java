@@ -17,8 +17,10 @@
 package com.woxthebox.draglistview.sample;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -112,9 +114,11 @@ public class DragListFragment extends Fragment {
         mItemArray = new ArrayList<>();
         //mItemArray.add(new Pair<>((long) 0, "@drawable/ic_keyboard_arrow_up_black_24dp"));
         lastId = -1;
+
         for(int i = 0; i<Var.activeBlocks.size(); i++){
             mItemArray.add(new Pair<>((long) ++lastId, Var.activeBlocks.get(i).iconDrag));
         }
+
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(FileName+" ("+(lastId+1)+"/64)");
         setupGridHorizontalRecyclerView();
 
@@ -233,8 +237,68 @@ public class DragListFragment extends Fragment {
                 if(Var.fileName.isEmpty()) {
                     Intent intent3 = new Intent(getActivity(), SaveDialogActivity.class);
                     startActivity(intent3);
+                    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(FileName+" ("+(lastId+1)+"/64)");
                 } else {
                     saveFile();
+                    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(FileName+" ("+(lastId+1)+"/64)");
+                }
+                return true;
+            case R.id.drag_menu_New_File:
+                if( (Var.isSaved == false)  ){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle("Confirm");
+                    builder.setMessage("Do you want previous save program?");
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            Var.isNew=true;
+                            if( (Var.fileName.isEmpty())  ){
+                                Intent intent = new Intent(getContext(), SaveDialogActivity.class);
+                                startActivity(intent);
+                                for(int i=0; i<=lastId; i++)
+                                    mDragListView.getAdapter().removeItem(0);
+                                lastId = -1;
+                                Var.isSaved = true;
+                                Var.fileName = "";
+                                FileName = "Roboviper Canvas";
+                                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(FileName+" ("+(lastId+1)+"/64)");
+                            } else {
+                                saveFile();
+                                Var.activeBlocks.clear();
+                                for(int i=0; i<=lastId+1; i++)
+                                    mDragListView.getAdapter().removeItem(0);
+                                lastId = -1;
+                                Var.isSaved = true;
+                                Var.fileName = "";
+                                FileName = "Roboviper Canvas";
+                                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(FileName+" ("+(lastId+1)+"/64)");
+                            }
+                        }
+                    });
+                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            Var.fileName = "";
+                            Var.activeBlocks.clear();
+                            for(int i=0; i<=lastId+1; i++)
+                                mDragListView.getAdapter().removeItem(0);
+                            lastId = -1;
+                            Var.isSaved = true;
+                            FileName = "Roboviper Canvas";
+                            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(FileName+" ("+(lastId+1)+"/64)");
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                } else {
+                    Var.fileName = "";
+                    Var.activeBlocks.clear();
+                    for(int i=0; i<=lastId+1; i++)
+                        mDragListView.getAdapter().removeItem(0);
+                    lastId = -1;
+                    FileName = "Roboviper Canvas";
+                    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(FileName+" ("+(lastId+1)+"/64)");
                 }
                 return true;
         }
@@ -504,4 +568,5 @@ public class DragListFragment extends Fragment {
                 }
         }
     }
+
 }
