@@ -135,7 +135,7 @@ public class DeviceListActivity extends Activity {
         //setTitle(R.string.scanning);
 
         //findViewById(R.id.title_new_devices).setVisibility(View.VISIBLE);
-
+        mNewDevicesArrayAdapter.clear();
         if (mBtAdapter.isDiscovering()) {
             mBtAdapter.cancelDiscovery();
         }
@@ -150,7 +150,14 @@ public class DeviceListActivity extends Activity {
                     // Get the BluetoothDevice object from the Intent
                     BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                     // Add the name and address to an array adapter to show in a ListView
-                    mNewDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+                    if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
+                        String deviceInfo = device.getName() + "\n" + device.getAddress();
+                        if(mNewDevicesArrayAdapter.getPosition(deviceInfo) < 0) {
+                            mNewDevicesArrayAdapter.add(deviceInfo);
+                        }
+                    }
+                    //String deviceInfo = device.getName() + "\n" + device.getAddress();
+                    //mNewDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
                 }
             }
         };

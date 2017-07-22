@@ -139,6 +139,7 @@ public class OpenFileActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
+                                mDragListView.getAdapter().notifyDataSetChanged();
                             }
                         });
                         AlertDialog alert = builder2.create();

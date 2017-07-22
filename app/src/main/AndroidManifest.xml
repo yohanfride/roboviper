@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2014 Magnus Woxblom
+<?xml version="1.0" encoding="utf-8"?><!--
+ Copyright 2014 Magnus Woxblom
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,46 +14,50 @@
      limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.woxthebox.draglistview.sample" >
+    package="com.woxthebox.draglistview.sample">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/roboviper_logo"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashScreen"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan" >
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PopUp"
-            android:theme="@style/AppTheme.PopUpTheme2">
-        </activity>
-       <activity android:name=".PopUpSourceCode"
-            android:theme="@style/AppTheme.PopUpTheme2">
-        </activity>
-        <activity android:name=".SaveDialogActivity"
-            android:theme="@style/AppTheme.PopUpTheme2">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
-            android:name="DeviceListActivity"></activity>
+            android:name=".PopUp"
+            android:theme="@style/AppTheme.PopUpTheme2"></activity>
         <activity
-            android:name=".OpenFileActivity"></activity>
-
+            android:name=".PopUpSourceCode"
+            android:theme="@style/AppTheme.PopUpTheme2"></activity>
+        <activity
+            android:name=".SaveDialogActivity"
+            android:theme="@style/AppTheme.PopUpTheme2"></activity>
+        <activity android:name=".DeviceListActivity" />
+        <activity android:name=".OpenFileActivity" />
     </application>
 
 </manifest>
