@@ -84,6 +84,13 @@ public class DeviceListActivity extends Activity {
                 //v.setVisibility(View.GONE);
             }
         });
+
+        scanButton = (Button) findViewById(R.id.bt_button_main);
+        scanButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                finish();
+            }
+        });
         /*IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         this.registerReceiver(mReceiver, filter);
 

@@ -23,229 +23,311 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="3"
-        android:background="#e4e4e4">
+        android:weightSum="10">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/menu_bg"
-            android:elevation="8dp"
+            android:layout_weight="9"
+            android:background="@color/app_color"
             android:orientation="horizontal">
 
-            <RelativeLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_weight="9">
 
-                <Button
-                    android:id="@+id/main_button_blok"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@null" />
+                    android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="top"
-                    android:layout_weight="1"
-                    android:scaleType="fitStart"
-                    app:srcCompat="@drawable/menu_list_block" />
+                    <ImageView
+                        android:id="@+id/imageView13"
+                        android:layout_width="87dp"
+                        android:layout_height="4dp"
+                        android:layout_gravity="bottom|center"
+                        android:cropToPadding="false"
+                        android:scaleType="center"
+                        android:tint="#ffffff"
+                        app:srcCompat="@android:drawable/bottom_bar" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:weightSum="3">
-
-                    <Space
+                    <TextView
+                        android:id="@+id/textViewMenu2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:background="@color/cardview_light_background"
+                        android:layout_weight="1"
+                        android:elevation="1dp"
                         android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="5">
+                        android:text="Menu"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                        <ImageView
-                            android:id="@+id/imageView5"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:tint="#f98820"
-                            app:srcCompat="@drawable/icon_block" />
+                    <Button
+                        android:id="@+id/buttonmenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null" />
+                </FrameLayout>
 
-                        <TextView
-                            android:id="@+id/textView10"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:text="Block"
-                            android:textColor="#f98820"
-                            android:textSize="24sp" />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right">
 
-                    </LinearLayout>
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:padding="12dp"
+                        android:tint="#ffffff"
+                        app:srcCompat="@drawable/bluetooth_icon" />
 
-                </LinearLayout>
+                    <Button
+                        android:id="@+id/main_button_bluetooth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null" />
+                </FrameLayout>
 
-            </RelativeLayout>
+            </FrameLayout>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/menu_bg"
-            android:elevation="8dp"
-            android:orientation="horizontal">
+            android:background="#e4e4e4"
+            android:orientation="vertical"
+            android:weightSum="3">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/menu_bg"
+                android:elevation="8dp"
+                android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/main_button_file"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@null" />
+                    android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/imageViewHome6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="top"
-                    android:layout_weight="1"
-                    android:scaleType="fitStart"
-                    app:srcCompat="@drawable/menu_list_file_02" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:weightSum="3">
-
-                    <Space
+                    <Button
+                        android:id="@+id/main_button_blok"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1" />
+                        android:background="@null" />
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="top"
+                        android:layout_weight="1"
+                        android:scaleType="fitStart"
+                        app:srcCompat="@drawable/menu_list_block" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:background="@color/cardview_light_background"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="5">
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:weightSum="3">
 
-                        <ImageView
-                            android:id="@+id/imageViewHome5"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:tint="#38a957"
-                            app:srcCompat="@drawable/files" />
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
 
-                        <TextView
-                            android:id="@+id/textViewHome10"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:text="Files"
-                            android:textColor="#38a957"
-                            android:textSize="24sp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:background="@color/cardview_light_background"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="5">
+
+                            <ImageView
+                                android:id="@+id/imageView5"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:tint="#f98820"
+                                app:srcCompat="@drawable/icon_block" />
+
+                            <TextView
+                                android:id="@+id/textView10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="4"
+                                android:text="Block"
+                                android:textColor="#f98820"
+                                android:textSize="24sp" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
-                </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
 
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/menu_bg"
-            android:elevation="8dp"
-            android:orientation="horizontal">
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/menu_bg"
+                android:elevation="8dp"
+                android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/buttonHome4"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@null" />
+                    android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/imageViewMenu6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="top"
-                    android:layout_weight="1"
-                    android:scaleType="fitStart"
-                    app:srcCompat="@drawable/menu_list_cloud_03" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:weightSum="3">
-
-                    <Space
+                    <Button
+                        android:id="@+id/main_button_file"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1" />
+                        android:background="@null" />
+
+                    <ImageView
+                        android:id="@+id/imageViewHome6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="top"
+                        android:layout_weight="1"
+                        android:scaleType="fitStart"
+                        app:srcCompat="@drawable/menu_list_file_02" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:background="@color/cardview_light_background"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="5">
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:weightSum="3">
 
-                        <ImageView
-                            android:id="@+id/imageViewMenu5"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:tint="#e75d70"
-                            app:srcCompat="@drawable/cloud" />
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
 
-                        <TextView
-                            android:id="@+id/textViewMenu10"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:text="Cloud"
-                            android:textColor="#e75d70"
-                            android:textSize="24sp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:background="@color/cardview_light_background"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="5">
+
+                            <ImageView
+                                android:id="@+id/imageViewHome5"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:tint="#38a957"
+                                app:srcCompat="@drawable/files" />
+
+                            <TextView
+                                android:id="@+id/textViewHome10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="4"
+                                android:text="Files"
+                                android:textColor="#38a957"
+                                android:textSize="24sp" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
-                </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
 
-            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/menu_bg"
+                android:elevation="8dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/main_button_manual"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null" />
+
+                    <ImageView
+                        android:id="@+id/imageViewMenu6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="top"
+                        android:layout_weight="1"
+                        android:scaleType="fitStart"
+                        app:srcCompat="@drawable/manual_04" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:background="@color/cardview_light_background"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="5">
+
+                            <ImageView
+                                android:id="@+id/imageViewMenu5"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:tint="#e75d70"
+                                app:srcCompat="@drawable/manual" />
+
+                            <TextView
+                                android:id="@+id/textViewMenu10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="4"
+                                android:text="Help"
+                                android:textColor="#e75d70"
+                                android:textSize="24sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

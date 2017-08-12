@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -185,6 +186,24 @@ public class OpenFileActivity extends AppCompatActivity {
                 }, 2000);
             }
         });*/
+
+        Button backs = (Button) findViewById(R.id.buttonback);
+        backs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        Button newb = (Button) findViewById(R.id.buttonNew);
+        newb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Var.activeBlocks.clear();
+                Var.fileName = "";
+                showFragment(DragListFragment.newInstance());
+                getSupportActionBar().show();
+            }
+        });
     }
 
     private void setupListRecyclerView() {

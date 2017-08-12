@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
         Button btnBlok = (Button) findViewById(R.id.main_button_blok);
         btnBlok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +54,15 @@ public class MainActivity extends AppCompatActivity {
                 Var.activeBlocks.clear();
                 Var.fileName="";
                 showFragment(DragListFragment.newInstance());
+                getSupportActionBar().show();
+            }
+        });
+        Button btnBlue = (Button) findViewById(R.id.main_button_bluetooth);
+        btnBlue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), DeviceListActivity.class);
+                startActivity(intent);
             }
         });
         if (savedInstanceState == null) {
@@ -64,6 +74,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Var.activeBlocks.clear();
                 Intent intent = new Intent(getApplication(), OpenFileActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button btnManual = (Button) findViewById(R.id.main_button_manual);
+        btnManual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Var.activeBlocks.clear();
+                Var.fileName="";
+                Intent intent = new Intent(getApplication(), ManualActivity.class);
                 startActivity(intent);
             }
         });
@@ -119,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             getFragmentManager().popBackStack();
         }
+        getSupportActionBar().hide();
         Var.isSaved = true;
         Var.lastFragment = "";
     }
@@ -152,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog alert = builder.create();
                 alert.show();
             } else {
+                getSupportActionBar().hide();
                 super.onBackPressed();
                 getSupportActionBar().setTitle(R.string.app_name);
                 Var.lastFragment = "";

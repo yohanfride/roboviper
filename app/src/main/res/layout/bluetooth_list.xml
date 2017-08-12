@@ -4,8 +4,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E4E4E4" >
-
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="10"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:background="@color/app_color"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_weight="9">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textViewMenu2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:elevation="1dp"
+                        android:gravity="center"
+                        android:text="Menu"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                    <Button
+                        android:id="@+id/bt_button_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView11w"
+                        android:layout_width="48dp"
+                        android:layout_height="4dp"
+                        android:layout_gravity="bottom|center"
+                        android:cropToPadding="false"
+                        android:scaleType="center"
+                        android:tint="#ffffff"
+                        app:srcCompat="@android:drawable/bottom_bar" />
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:padding="12dp"
+                        android:tint="#ffffff"
+                        app:srcCompat="@drawable/bluetooth_icon" />
+
+                    <Button
+                        android:id="@+id/buttonbluetooth2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null" />
+                </FrameLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -48,5 +125,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
+    </LinearLayout>
 </LinearLayout>

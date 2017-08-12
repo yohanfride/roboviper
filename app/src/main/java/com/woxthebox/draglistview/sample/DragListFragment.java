@@ -31,6 +31,7 @@ import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -74,12 +75,14 @@ public class DragListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.drag_list_layout2, container, false);
         Var.lastFragment = "Drag List";
         if(Var.fileName.isEmpty())
             FileName = "Roboviper Canvas";
         else
             FileName = Var.fileName;
+
 
         mRefreshLayout = (MySwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mRefreshLayout.setEnabled(false);
@@ -451,14 +454,14 @@ public class DragListFragment extends Fragment {
             mDragListView.getAdapter().addItem(++lastId, new Pair<>((long) lastId, text));
         }
         Var.activeBlocks.add(new Modules(idMod,text));
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(FileName+" ("+(lastId+1)+"/64)");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle( " ("+(lastId+1)+"/64)"+FileName);
         Var.DragItem = mDragListView;
         Var.LastID = lastId;
     }
 
     public void onResume(){
         super.onResume();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(FileName+" ("+(lastId+1)+"/64)");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(" ("+(lastId+1)+"/64)"+ FileName);
     }
 
     public static void setup() {

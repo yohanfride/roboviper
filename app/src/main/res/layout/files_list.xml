@@ -14,15 +14,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="8"
+            android:layout_weight="8.5"
             android:background="#38a957"
             android:orientation="horizontal"
-            android:weightSum="10">
+            android:weightSum="16">
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="9">
+                android:layout_weight="7">
 
                 <Button
                     android:id="@+id/button"
@@ -41,7 +41,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2.5"
                 android:background="#38a957"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -68,13 +68,37 @@
 
             </LinearLayout>
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_weight="7"
+                android:layout_marginRight="6dp">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imageView4f"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="6dp"
+                    android:tint="#ffffff"
+                    app:srcCompat="@drawable/add" />
+
+                <Button
+                    android:id="@+id/buttonNew"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null" />
+            </FrameLayout>
+
         </LinearLayout>
 
         <ListView
             android:id="@+id/file_list_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2"/>
+            android:layout_weight="1.5" />
 
 
     </LinearLayout>
