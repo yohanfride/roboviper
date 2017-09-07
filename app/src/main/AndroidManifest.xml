@@ -57,7 +57,9 @@
             android:name=".SaveDialogActivity"
             android:theme="@style/AppTheme.PopUpTheme2"></activity>
         <activity android:name=".DeviceListActivity" />
-        <activity android:name=".OpenFileActivity" />
+        <activity
+            android:name=".OpenFileActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".ManualActivity" />
     </application>
 

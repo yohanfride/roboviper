@@ -14,7 +14,7 @@
 -->
 <resources>
 
-    <string name="app_name">Re : RoboViper(beta)</string>
+    <string name="app_name">Roboviper 2.0</string>
     <string name="action_lists">Test lists</string>
     <string name="action_board">Test board </string>
     <string name="action_disable_drag">Disable drag</string>

@@ -55,12 +55,14 @@ public class MainActivity extends AppCompatActivity {
                 Var.fileName="";
                 showFragment(DragListFragment.newInstance());
                 getSupportActionBar().show();
+                Var.lastFragment = "bluetooth";
             }
         });
         Button btnBlue = (Button) findViewById(R.id.main_button_bluetooth);
         btnBlue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Var.lastFragment = "main";
                 Intent intent = new Intent(getApplication(), DeviceListActivity.class);
                 startActivity(intent);
             }
@@ -157,10 +159,12 @@ public class MainActivity extends AppCompatActivity {
                         if( (Var.fileName.isEmpty())  ){
                             Intent intent = new Intent(getApplicationContext(), SaveDialogActivity.class);
                             startActivity(intent);
+
                         } else {
                             saveFile();
+                            onBackPressed();
                         }
-                        onBackPressed();
+                        //onBackPressed();
                     }
                 });
                 builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {

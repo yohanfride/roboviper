@@ -111,9 +111,9 @@
                 android:id="@+id/title_paired_devices"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:layout_marginLeft="58dp"
-                android:layout_marginTop="12dp"
+                android:paddingBottom="24dp"
+                android:paddingLeft="48dp"
+                android:paddingTop="24dp"
                 android:text="Available devices"
                 android:textStyle="bold" />
 
@@ -121,7 +121,9 @@
                 android:id="@+id/new_devices"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="12dp" />
+                android:layout_marginTop="12dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp" />
         </LinearLayout>
 
     </LinearLayout>

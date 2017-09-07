@@ -129,7 +129,9 @@
                         android:id="@+id/paired_device"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp" />
+                        android:layout_marginTop="12dp"
+                        android:paddingLeft="24dp"
+                        android:paddingRight="24dp" />
 
                 </LinearLayout>
 
@@ -152,7 +154,9 @@
                         android:id="@+id/new_devices"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp" />
+                        android:layout_marginTop="12dp"
+                        android:paddingLeft="24dp"
+                        android:paddingRight="24dp" />
 
                 </LinearLayout>
 

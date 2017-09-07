@@ -238,8 +238,14 @@ public class OpenFileActivity extends AppCompatActivity {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        saveFile();
-                        onBackPressed();
+                        if( (Var.fileName.isEmpty())  ){
+                            Intent intent = new Intent(getApplicationContext(), SaveDialogActivity.class);
+                            startActivity(intent);
+
+                        } else {
+                            saveFile();
+                            onBackPressed();
+                        }
                         Var.isSaved = true;
                     }
                 });

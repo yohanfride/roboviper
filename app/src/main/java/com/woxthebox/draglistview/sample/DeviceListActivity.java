@@ -13,6 +13,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -25,8 +27,10 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
+import visualprogammer.ServiceBluetooth;
 import visualprogammer.Var;
 
+import static com.woxthebox.draglistview.sample.DragListFragment.mDragListView;
 import static com.woxthebox.draglistview.sample.DragListFragment.setup;
 
 
@@ -157,12 +161,12 @@ public class DeviceListActivity extends Activity {
                     // Get the BluetoothDevice object from the Intent
                     BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                     // Add the name and address to an array adapter to show in a ListView
-                    if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
+                    //if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
                         String deviceInfo = device.getName() + "\n" + device.getAddress();
                         if(mNewDevicesArrayAdapter.getPosition(deviceInfo) < 0) {
                             mNewDevicesArrayAdapter.add(deviceInfo);
                         }
-                    }
+                    //}
                     //String deviceInfo = device.getName() + "\n" + device.getAddress();
                     //mNewDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
                 }
@@ -179,8 +183,10 @@ public class DeviceListActivity extends Activity {
         public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
 
             mBtAdapter.cancelDiscovery();
+            if(!(Var.lastFragment == "main")) {
+                setup();
+            }
 
-            setup();
             String info = ((TextView) v).getText().toString();
             String info2 = info.substring(0,info.length() - 17);
             String address = info.substring(info.length() - 17);
@@ -188,9 +194,12 @@ public class DeviceListActivity extends Activity {
             Var.namadevice_connect = info2;
             Var.BlAddress = address;
             BluetoothDevice device = Var.bluetooth_adapter.getRemoteDevice(address);
-            Var.service_data_io.connect(device);
 
-            Toast.makeText(getApplicationContext(), "Connect to "+ Var.namadevice_connect, Toast.LENGTH_SHORT).show();
+            if(!(Var.lastFragment == "main")) {
+                Var.service_data_io.connect(device);
+            }
+
+            Toast.makeText(getApplicationContext(), "Connectd to "+ Var.namadevice_connect, Toast.LENGTH_SHORT).show();
             finish();
         }
     };
@@ -223,4 +232,40 @@ public class DeviceListActivity extends Activity {
         }
     };
 
+    private static final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case Var.MESSAGE_STATE_CHANGE:
+                    switch (msg.arg1) {
+                        case ServiceBluetooth.STATE_CONNECTED:
+                            //stat.setText("Tersambung ke : "+Var.namadevice_connect);
+                            break;
+                        case ServiceBluetooth.STATE_CONNECTING:
+                            //stat.setText(R.string.title_connecting);
+                            break;
+                        case ServiceBluetooth.STATE_LISTEN:
+                        case ServiceBluetooth.STATE_NONE:
+                            //stat.setText(R.string.title_not_connected);
+                            break;
+                    }
+                    break;
+                case Var.MESSAGE_DEVICE_NAME:
+
+                    Var.namadevice_connect = msg.getData().getString(Var.DEVICE_NAME);
+                    Toast.makeText(mDragListView.getContext(), "Tersambung ke "
+                            + Var.namadevice_connect, Toast.LENGTH_SHORT).show();
+                    break;
+
+                case Var.MESSAGE_READ:
+
+                    break;
+
+                case Var.MESSAGE_TOAST:
+                    Toast.makeText(mDragListView.getContext(), msg.getData().getString(Var.TOAST),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
 }

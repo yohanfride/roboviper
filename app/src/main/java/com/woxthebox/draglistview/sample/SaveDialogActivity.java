@@ -1,5 +1,6 @@
 package com.woxthebox.draglistview.sample;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +18,7 @@ public class SaveDialogActivity extends Activity {
 	EditText input;
 	Button cancel, save;
 	
+
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.save_popup);
@@ -79,5 +81,6 @@ public class SaveDialogActivity extends Activity {
 			}
 		});
 	}
+
 
 }

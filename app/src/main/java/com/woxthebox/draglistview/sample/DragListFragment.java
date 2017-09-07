@@ -57,7 +57,7 @@ import static visualprogammer.Var.hexToByte;
 public class DragListFragment extends Fragment {
 
     private ArrayList<Pair<Long, String>> mItemArray;
-    private static DragListView mDragListView;
+    public static DragListView mDragListView;
     private ListSwipeHelper mSwipeHelper;
     private MySwipeRefreshLayout mRefreshLayout;
     public static int lastId=0;
@@ -196,8 +196,11 @@ public class DragListFragment extends Fragment {
             }
         });
 
-
-
+        if(!(Var.BlAddress.isEmpty())) {
+            setup();
+            BluetoothDevice device = Var.bluetooth_adapter.getRemoteDevice(Var.BlAddress);
+            Var.service_data_io.connect(device);
+        }
         return view;
     }
 
@@ -511,7 +514,7 @@ public class DragListFragment extends Fragment {
         return "";
     }
 
-    private static final Handler mHandler = new Handler() {
+    public static final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
